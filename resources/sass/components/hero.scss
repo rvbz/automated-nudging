@@ -1,0 +1,8 @@
+.hero {
+	padding-top: $global-padding;
+	padding-bottom: $global-padding;
+	background: url('../images/hero-movie-background.jpg') center top;
+	background-size: cover;
+}
+
+@import "./menu";
