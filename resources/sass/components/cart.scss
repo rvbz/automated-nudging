@@ -1,0 +1,88 @@
+.shopping-cart-wrapper {
+
+	.counter {
+		> div {
+			padding: rem-calc(15);
+			// display: inline-block;
+		}
+
+		.cart-icon{
+			background: $primary-color;
+			color: $white;
+			font-size: rem-calc(22);
+			min-width: rem-calc(63);
+			text-align: center;
+		}
+		.item-counter {
+			background: lighten($primary-color, 15%);
+			color: $white;
+			line-height: rem-calc(32);
+			text-align: center;
+			min-width: rem-calc(50);
+		}
+	}
+		
+	
+}
+
+.products-wrapper {
+	margin-top: $global-margin * 2;
+
+	.cell.product {
+		margin-bottom: $global-margin;
+
+		.product-inside{
+			position: relative;
+
+			.hover-add-to-cart {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				background: rgba($primary-color, .5);
+
+
+				.price-tag {
+					background: $secondary-color;
+					text-align: center;
+					width: 70%;
+					color: $white;
+					padding: rem-calc(5);
+					border-radius: 100px;
+					position: absolute;
+					bottom: 8%;
+					left: 15%;
+				}
+
+				.plus-minus-input {
+					align-items: center;
+
+					.input-group-field {
+					    text-align: center;
+					    margin-left: 0.5rem;
+					    margin-right: 0.5rem;
+					    padding: 1rem;
+
+					    &::-webkit-inner-spin-button,
+					    ::-webkit-outer-spin-button {
+					      appearance: none;
+					    }
+					}
+
+					.input-group-button {
+					    .circle {
+					      border-radius: 50%;
+					      padding: 0.25em 0.8em;
+					    }
+					}
+				}
+
+
+			}
+		}
+		
+
+			
+	}
+}

@@ -1,5 +1,10 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+$fa-font-path: '/fonts/font-awesome';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
 // Variables
 @import 'variables';
@@ -16,5 +21,7 @@
 ==================================*/
 
 @import 'components/hero';
+@import 'components/content';
+@import 'components/cart';
 
 /*=====  End of Components  ======*/

@@ -16,4 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
     .options({
 	    processCssUrls: false
 	})
+	.copy('./node_modules/@fortawesome/fontawesome-free/webfonts/**', 'public/fonts/font-awesome')
     .browserSync('test.local:8888');
