@@ -13811,6 +13811,7 @@ html.is-reveal-open body {
 }
 .products-wrapper .cell.product .product-inside {
   position: relative;
+  text-align: center;
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart {
   position: absolute;
@@ -13818,8 +13819,11 @@ html.is-reveal-open body {
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(225, 68, 137, 0.5);
+  background: none;
   padding: 1rem;
+  text-align: center;
+  -webkit-transition: background 0.6s;
+  transition: background 0.6s;
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .price-tag {
   background: #359bd4;
@@ -13835,6 +13839,7 @@ html.is-reveal-open body {
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input {
   -webkit-box-align: center;
           align-items: center;
+  display: none;
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field {
   text-align: center;
@@ -13862,6 +13867,45 @@ html.is-reveal-open body {
   padding: 0.2777777778rem;
   background: #fefefe;
   color: #359bd4;
+}
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .add-to-cart-button {
+  background: #fefefe;
+  color: #359bd4;
+  display: none;
+  height: 5.2777777778rem;
+  width: 5.2777777778rem;
+  border-radius: 50%;
+  font-size: 2.8888888889rem;
+  padding: 0.5555555556rem;
+  text-align: center;
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+}
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .add-to-cart-button:hover {
+  background: #359bd4;
+  color: #fefefe;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.products-wrapper .cell.product:hover .product-inside .hover-add-to-cart {
+  background: rgba(225, 68, 137, 0.5);
+  -webkit-transition: background 0.4s;
+  transition: background 0.4s;
+}
+.products-wrapper .cell.product:hover .product-inside .hover-add-to-cart .plus-minus-input {
+  display: -webkit-box;
+  display: flex;
+}
+.products-wrapper .cell.product:hover .product-inside .hover-add-to-cart .add-to-cart-button {
+  display: inline-block;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.products-wrapper .cell.product .product-name {
+  text-align: center;
+  font-size: 1.1111111111rem;
+  font-weight: bold;
+  margin-top: 0.5555555556rem;
 }
 
 /*=====  End of Components  ======*/

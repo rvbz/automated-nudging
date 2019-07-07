@@ -57,7 +57,7 @@
             </div>
 
             <!-- Product grid -->
-            <div class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-4">
+            <div class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
                 <div class="cell product">
                     <div class="product-inside">
                         <img src="{{ asset('images/products/popcorn/popcorn-grid.png') }}" alt="Popcorn">
@@ -70,7 +70,7 @@
                                       <i class="fas fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field" type="number" name="quantity" value="0">
+                                <input class="input-group-field" type="number" name="quantity" value="1">
                                 <div class="input-group-button">
                                     <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
                                       <i class="fas fa-plus" aria-hidden="true"></i>
@@ -78,10 +78,13 @@
                                 </div>
                             </div>
 
-
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
 
                             <div class="price-tag">€30.00</div>
                         </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Popcorn</p>
                     </div>
                 </div>
                 <div class="cell product">Nisi, necessitatibus ipsam? Aliquid molestiae fuga ipsum, quam pariatur aut, autem quaerat at perferendis aspernatur, explicabo cum repellat? Laudantium sapiente blanditiis nemo perferendis placeat possimus quo accusantium repudiandae, nesciunt cumque.</div>
