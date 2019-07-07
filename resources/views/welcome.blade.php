@@ -87,13 +87,209 @@
                         <p>Popcorn</p>
                     </div>
                 </div>
-                <div class="cell product">Nisi, necessitatibus ipsam? Aliquid molestiae fuga ipsum, quam pariatur aut, autem quaerat at perferendis aspernatur, explicabo cum repellat? Laudantium sapiente blanditiis nemo perferendis placeat possimus quo accusantium repudiandae, nesciunt cumque.</div>
-                <div class="cell product">Voluptatum dignissimos accusantium explicabo velit, eius non, beatae voluptatem vitae magni, alias minus? Dolores, soluta, mollitia. Dignissimos totam porro nam repellat, doloribus nulla nihil! Nam veritatis nihil beatae deleniti iure.</div>
-                <div class="cell product">Similique, id a libero facilis illo pariatur, eos quod quos modi quo neque voluptatum deserunt quidem dolore soluta officia, provident excepturi ipsum maiores obcaecati porro eveniet velit necessitatibus nihil. Eos.</div>
-                <div class="cell product">Quae eveniet nam saepe voluptate minus blanditiis dicta itaque maiores consequuntur, atque, consequatur officiis reprehenderit ad nulla incidunt laboriosam provident voluptatibus voluptates accusamus optio aperiam! Officia natus cum illum sit!</div>
-                <div class="cell product">Quis amet, numquam aspernatur cumque consectetur sunt eveniet, impedit non iste, odit accusantium deleniti doloribus deserunt earum eos voluptate necessitatibus. Dolore animi magnam fuga voluptate blanditiis omnis alias, porro excepturi.</div>
-                <div class="cell product">Nemo saepe, omnis tempore ut rerum suscipit ratione nobis! Dolores ut, tempora a iste corporis at dignissimos ad labore placeat facere sint repellat beatae qui autem quibusdam, saepe sunt quisquam.</div>
-                <div class="cell product">Quas repellat asperiores nesciunt, placeat! Facere, quos, cupiditate adipisci quibusdam est dolores corporis explicabo. Maiores consequatur explicabo, facere cumque ratione ad. Iste quisquam ullam delectus inventore voluptatibus suscipit, ab placeat.</div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/hotdog/hotdog-grid.png') }}" alt="Hotdog">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Hotdog</p>
+                    </div>
+                </div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/nachos/nachos-grid.png') }}" alt="Nachos">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Nachos</p>
+                    </div>
+                </div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/icecream/icecream-grid.png') }}" alt="Icecream">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Icecream</p>
+                    </div>
+                </div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/candy/candies-grid.png') }}" alt="Candies">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Candies</p>
+                    </div>
+                </div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/soda/soda-grid.png') }}" alt="Soda">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Soda</p>
+                    </div>
+                </div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/icedrink/icedrink-grid.png') }}" alt="Icedrink, Milkshake">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Icedrink, Milkshake</p>
+                    </div>
+                </div>
+                <div class="cell product">
+                    <div class="product-inside">
+                        <img src="{{ asset('images/products/water/water-grid.png') }}" alt="Water">
+
+                        <div class="hover-add-to-cart">
+                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
+                            <div class="input-group plus-minus-input align-center">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                      <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <div class="input-group-button">
+                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                      <i class="fas fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+
+                            <div class="price-tag">€30.00</div>
+                        </div>
+                    </div>
+                    <div class="product-name">
+                        <p>Water</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
