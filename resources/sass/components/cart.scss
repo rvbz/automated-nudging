@@ -41,6 +41,7 @@
 				right: 0;
 				left: 0;
 				background: rgba($primary-color, .5);
+				padding: $global-padding; 
 
 
 				.price-tag {
@@ -62,18 +63,32 @@
 					    text-align: center;
 					    margin-left: 0.5rem;
 					    margin-right: 0.5rem;
-					    padding: 1rem;
+					    // padding: 1rem;
 
 					    &::-webkit-inner-spin-button,
 					    ::-webkit-outer-spin-button {
 					      appearance: none;
 					    }
+
+					    flex: 0;
+					    min-width: auto;
+					    width: rem-calc(50);
+					    height: rem-calc(50);
+					    border-radius: 50%;
+					    background: $secondary-color;
+					    border: none;
+					    color: $white;
+					    font-weight: bold;
+					    font-size: rem-calc(26);
 					}
 
 					.input-group-button {
 					    .circle {
 					      border-radius: 50%;
-					      padding: 0.25em 0.8em;
+					      padding: rem-calc(5);
+					      // height: rem-calc(41);
+					      background: $white;
+					      color: $secondary-color;
 					    }
 					}
 				}

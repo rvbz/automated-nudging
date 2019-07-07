@@ -13819,6 +13819,7 @@ html.is-reveal-open body {
   right: 0;
   left: 0;
   background: rgba(225, 68, 137, 0.5);
+  padding: 1rem;
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .price-tag {
   background: #359bd4;
@@ -13839,7 +13840,17 @@ html.is-reveal-open body {
   text-align: center;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  padding: 1rem;
+  -webkit-box-flex: 0;
+          flex: 0;
+  min-width: auto;
+  width: 2.7777777778rem;
+  height: 2.7777777778rem;
+  border-radius: 50%;
+  background: #359bd4;
+  border: none;
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1.4444444444rem;
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field::-webkit-inner-spin-button,
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field ::-webkit-outer-spin-button {
@@ -13848,7 +13859,9 @@ html.is-reveal-open body {
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-button .circle {
   border-radius: 50%;
-  padding: 0.25em 0.8em;
+  padding: 0.2777777778rem;
+  background: #fefefe;
+  color: #359bd4;
 }
 
 /*=====  End of Components  ======*/
