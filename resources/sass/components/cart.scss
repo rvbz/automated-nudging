@@ -12,6 +12,53 @@
 			font-size: rem-calc(22);
 			min-width: rem-calc(63);
 			text-align: center;
+			position: relative;
+
+			.cart-summary {
+				position: absolute;
+				right: 0;
+				top: 63px;
+				background: $primary-color;
+				padding: $global-padding;
+				font-size: $global-font-size;
+				min-width: rem-calc(400);
+				z-index: 99;
+				text-align: left;
+				display: none;
+				transition: all .4s;
+
+				table.unstriped {
+					background: none;
+
+					tbody {
+						background: none;
+						border: none;
+
+						tr {
+							background: none;
+
+							td {
+								border-right: solid 1px $white;
+
+								&:last-child {
+									border: none;
+								} 
+							}
+						}
+					}
+				}
+
+				p.spend-summary {
+					margin-bottom: 0;
+					margin-top: $global-margin;
+				}
+			} 
+
+			&:hover {
+				.cart-summary {
+					display: inline-block;
+				} 
+			}
 		}
 		.item-counter {
 			background: lighten($primary-color, 15%);

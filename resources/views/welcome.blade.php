@@ -18,6 +18,26 @@
                             </div>
                             <div class=" cell shrink cart-icon">
                                 <i class="fas fa-shopping-cart"></i>
+
+                                <div class="cart-summary">
+                                    <p><strong>Your selected snacks for the movie:</strong></p>
+                                    <table class="unstriped">
+                                        <tbody>
+                                            <tr>
+                                                <td>Hotdog</td>
+                                                <td class="text-center">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Soda</td>
+                                                <td class="text-center">1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <p class="text-right spend-summary">
+                                        <strong>Total spend: </strong><span class="total-amount">€40.00</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                             

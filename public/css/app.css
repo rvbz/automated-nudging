@@ -13826,6 +13826,44 @@ html.is-reveal-open body {
   font-size: 1.2222222222rem;
   min-width: 3.5rem;
   text-align: center;
+  position: relative;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary {
+  position: absolute;
+  right: 0;
+  top: 63px;
+  background: #e14489;
+  padding: 1rem;
+  font-size: 1.125rem;
+  min-width: 22.2222222222rem;
+  z-index: 99;
+  text-align: left;
+  display: none;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary table.unstriped {
+  background: none;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary table.unstriped tbody {
+  background: none;
+  border: none;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary table.unstriped tbody tr {
+  background: none;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary table.unstriped tbody tr td {
+  border-right: solid 1px #fefefe;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary table.unstriped tbody tr td:last-child {
+  border: none;
+}
+.shopping-cart-wrapper .counter .cart-icon .cart-summary p.spend-summary {
+  margin-bottom: 0;
+  margin-top: 1rem;
+}
+.shopping-cart-wrapper .counter .cart-icon:hover .cart-summary {
+  display: inline-block;
 }
 .shopping-cart-wrapper .counter .item-counter {
   background: #ec86b3;
