@@ -13665,6 +13665,30 @@ html.is-reveal-open body {
 /*==================================
 =            Components            =
 ==================================*/
+.button.round-icon {
+  border-radius: 100px;
+  font-weight: bold;
+  padding: 0 0 0 1.1111111111rem;
+  background: #ec86b3;
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+}
+.button.round-icon:after {
+  content: "\F061";
+  display: inline-block;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  background: #e14489;
+  margin-left: 1rem;
+  border-radius: 50%;
+  padding: 0.5555555556rem;
+}
+.button.round-icon:hover {
+  font-size: 1.3rem;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
 .hero {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -13783,6 +13807,13 @@ html.is-reveal-open body {
 }
 .content {
   margin-top: 2rem;
+}
+
+.review-section {
+  margin-top: 2rem;
+}
+.review-section .total-section {
+  font-size: 1.2222222222rem;
 }
 
 .shopping-cart-wrapper .counter > div {

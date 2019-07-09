@@ -1,3 +1,11 @@
 .content {
 	margin-top: $global-margin * 2;
 }
+
+.review-section {
+	margin-top: $global-margin * 2;
+
+	.total-section {
+		font-size: rem-calc(22);
+	}
+}  

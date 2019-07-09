@@ -291,6 +291,19 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Summary and Next button -->
+            <div class="review-section">
+                <div class="grid-x grid-padding-x ">
+                    <div class="cell medium-6 total-section text-right medium-text-left">
+                        <p><strong>Total spend: </strong><span class="total-amount">€40.00</span></p>
+                    </div>
+                    <div class="cell medium-6 text-right">
+                        <a href="#" class="button round-icon large">Checkout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
