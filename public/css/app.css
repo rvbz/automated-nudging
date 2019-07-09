@@ -13807,6 +13807,7 @@ html.is-reveal-open body {
 }
 .content {
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .review-section {
@@ -13937,6 +13938,13 @@ html.is-reveal-open body {
   font-size: 1.1111111111rem;
   font-weight: bold;
   margin-top: 0.5555555556rem;
+}
+
+.footer {
+  background: #222222;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: #fefefe;
 }
 
 /*=====  End of Components  ======*/
