@@ -1,40 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="hero">
-        <div class="grid-container">
-            <nav class="top-bar topbar-responsive">
-                <div class="top-bar-title">
-                    <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
-                      <button class="menu-icon" type="button" data-toggle></button>
-                    </span>
-                    <a class="topbar-responsive-logo" href="#">
-                        <img src="{{ asset('images/logo.png') }}" alt="World cinemas logo">
-                    </a>
-                </div>
-                <div id="topbar-responsive" class="topbar-responsive-links">
-                    <div class="top-bar-right">
-                      <ul class="menu simple vertical medium-horizontal">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">What's on</a></li>
-                        <li><a href="#">Gift cards</a></li>
-                        <li><a href="#">Contact</a></li>
-                      </ul>
-                    </div>
-                </div>
-            </nav>
+    
 
-            <!-- Movie ticket -->
-            <div class="grid-x">
-                <div class="cell medium-4 medium-offset-8">
-                    <img src="{{ asset('images/movie-ticket.png') }}" alt="Movie screening">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="content">
+    
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
                 <div class="cell medium-9">
@@ -305,53 +274,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer">
-        <div class="grid-container">
-            <div class="grid-x grid-padding-x">
-                <div class="cell medium-6 large-3">
-                    <h4><strong>Get in touch</strong></h4>
-                    <ul class="no-bullet">
-                        <li>FAQs</li>
-                        <li>Give us feedback</li>
-                        <li>Contact us</li>
-                    </ul>
-                </div>
-                <div class="cell medium-6 large-3">
-                    <h4><strong>About World Cinema</strong></h4>
-                    <ul class="no-bullet">
-                        <li>About us</li>
-                        <li>Find us</li>
-                        <li>Schedule</li>
-                        <li>News</li>
-                    </ul>
-                </div>
-                <div class="cell medium-6 large-3">
-                    <h4><strong>Legal stuff</strong></h4>
-                    <ul class="no-bullet">
-                        <li>Terms & Conditions</li>
-                        <li>Privacy policy</li>
-                        <li>Cookie policy</li>
-                    </ul>
-                </div>
-                <div class="cell medium-6 large-3">
-                    <h4><strong>Contact with us</strong></h4>
-                    <ul class="no-bullet">
-                        <li>Facebook</li>
-                        <li>Twitter</li>
-                        <li>Google +</li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="grid-x grid-padding-x">
-                <div class="cell">
-                    <hr>
-                    © All rights reserved
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 @endsection
