@@ -42,21 +42,21 @@
 
             <!-- Product grid -->
             <div class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
-                <div class="cell product">
+                <div class="cell product" v-for="product in products">
                     <div class="product-inside">
-                        <img src="https://api.fnkr.net/testimg/350x350/00CED1/FFF/?text=img+placeholder" alt="Popcorn">
+                        <img :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-grid.png'" :alt="product.name">
 
                         <div class="hover-add-to-cart">
                             <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
                             <div class="input-group plus-minus-input align-center">
                                 <div class="input-group-button">
-                                    <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
+                                    <button type="button" class="button circle" data-quantity="minus" :data-field="'quantity-'+ toLowerCase(product.name)">
                                       <i class="fas fa-minus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input class="input-group-field" type="number" name="quantity" value="1">
+                                <input class="input-group-field" type="number" :name="'quantity-'+ toLowerCase(product.name)" value="1">
                                 <div class="input-group-button">
-                                    <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
+                                    <button type="button" class="button circle" data-quantity="plus" :data-field="'quantity-'+ toLowerCase(product.name)">
                                       <i class="fas fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -64,11 +64,11 @@
 
                             <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
 
-                            <div class="price-tag">€30.00</div>
+                            <div class="price-tag">€{{ product.price }}</div>
                         </div>
                     </div>
                     <div class="product-name">
-                        <p>Popcorn</p>
+                        <p>{{ product.name }}</p>
                     </div>
                 </div>
                 
@@ -92,7 +92,22 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
-        }
+            // Get all products
+            var $this = this;
+            axios.get('api/products/all').then(function(response){
+              $this.products = response.data;
+            });
+        },
+        data() {
+            return {
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                products: [],
+            }
+        },
+        methods: {
+            toLowerCase(string) {
+                return string.toLowerCase();
+            }
+        },
     }
 </script>

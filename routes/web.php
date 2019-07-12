@@ -16,3 +16,13 @@ Route::get('/', 'ShowWelcomePage');
 Route::get('/checkout', function() {
 	return view('checkout');
 });
+
+
+
+/*===========================
+=            API            =
+===========================*/
+
+Route::get('api/products/all', 'ShowWelcomePage@getAllProducts');
+
+/*=====  End of API  ======*/

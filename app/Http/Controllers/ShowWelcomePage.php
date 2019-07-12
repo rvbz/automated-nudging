@@ -15,10 +15,15 @@ class ShowWelcomePage extends Controller
      */
     public function __invoke(Request $request)
     {
-        $products = array('Popcorn', 'Hotdog', 'Nachos', 'Icecream', 'Candies', 'Soda', 'Cold drink, Milkshake', 'Water');
 
         $products = Product::all();
 
         return view('welcome', ['products' => $products]);
+    }
+
+    public function getAllProducts() {
+        $products = Product::all();
+
+        return response()->json($products);
     }
 }

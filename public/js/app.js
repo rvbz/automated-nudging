@@ -1964,7 +1964,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    // Get all products
+    var $this = this;
+    axios.get('api/products/all').then(function (response) {
+      $this.products = response.data;
+    });
+  },
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      products: []
+    };
+  },
+  methods: {
+    toLowerCase: function toLowerCase(string) {
+      return string.toLowerCase();
+    }
   }
 });
 
@@ -44673,182 +44688,205 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "grid-container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4"
+      },
+      _vm._l(_vm.products, function(product) {
+        return _c("div", { staticClass: "cell product" }, [
+          _c("div", { staticClass: "product-inside" }, [
+            _c("img", {
+              attrs: {
+                src:
+                  "/images/products/" +
+                  _vm.toLowerCase(product.name) +
+                  "/" +
+                  _vm.toLowerCase(product.name) +
+                  "-grid.png",
+                alt: product.name
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "hover-add-to-cart" }, [
+              _c(
+                "div",
+                { staticClass: "input-group plus-minus-input align-center" },
+                [
+                  _c("div", { staticClass: "input-group-button" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button circle",
+                        attrs: {
+                          type: "button",
+                          "data-quantity": "minus",
+                          "data-field":
+                            "quantity-" + _vm.toLowerCase(product.name)
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fas fa-minus",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-group-field",
+                    attrs: {
+                      type: "number",
+                      name: "quantity-" + _vm.toLowerCase(product.name),
+                      value: "1"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-button" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button circle",
+                        attrs: {
+                          type: "button",
+                          "data-quantity": "plus",
+                          "data-field":
+                            "quantity-" + _vm.toLowerCase(product.name)
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fas fa-plus",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "price-tag" }, [
+                _vm._v("€" + _vm._s(product.price))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "product-name" }, [
+            _c("p", [_vm._v(_vm._s(product.name))])
+          ])
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm._m(2)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid-container" }, [
-      _c("div", { staticClass: "grid-x grid-padding-x" }, [
-        _c("div", { staticClass: "cell medium-9" }, [
-          _c("h3", [
-            _c("strong", [_vm._v("What about some snacks for your movie")])
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "Every movie is better with something to eat with, and we know it, so we offer you a wide variety of snacks."
-            )
-          ])
+    return _c("div", { staticClass: "grid-x grid-padding-x" }, [
+      _c("div", { staticClass: "cell medium-9" }, [
+        _c("h3", [
+          _c("strong", [_vm._v("What about some snacks for your movie")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "cell medium-3" }, [
-          _c("div", { staticClass: "shopping-cart-wrapper" }, [
-            _c("div", { staticClass: "counter grid-x align-right" }, [
-              _c("div", { staticClass: "cell shrink item-counter" }, [
-                _c("strong", { staticClass: "number-of-items" }, [_vm._v("0")])
-              ]),
+        _c("p", [
+          _vm._v(
+            "Every movie is better with something to eat with, and we know it, so we offer you a wide variety of snacks."
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell medium-3" }, [
+        _c("div", { staticClass: "shopping-cart-wrapper" }, [
+          _c("div", { staticClass: "counter grid-x align-right" }, [
+            _c("div", { staticClass: "cell shrink item-counter" }, [
+              _c("strong", { staticClass: "number-of-items" }, [_vm._v("0")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " cell shrink cart-icon" }, [
+              _c("i", { staticClass: "fas fa-shopping-cart" }),
               _vm._v(" "),
-              _c("div", { staticClass: " cell shrink cart-icon" }, [
-                _c("i", { staticClass: "fas fa-shopping-cart" }),
+              _c("div", { staticClass: "cart-summary" }, [
+                _c("p", [
+                  _c("strong", [_vm._v("Your selected snacks for the movie:")])
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "cart-summary" }, [
-                  _c("p", [
-                    _c("strong", [
-                      _vm._v("Your selected snacks for the movie:")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("table", { staticClass: "unstriped" }, [
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("td", [_vm._v("Hotdog")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-center" }, [_vm._v("1")])
-                      ]),
+                _c("table", { staticClass: "unstriped" }, [
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [_vm._v("Hotdog")]),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("Soda")]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-center" }, [_vm._v("1")])
-                      ])
+                      _c("td", { staticClass: "text-center" }, [_vm._v("1")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Soda")]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-center" }, [_vm._v("1")])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-right spend-summary" }, [
-                    _c("strong", [_vm._v("Total spend: ")]),
-                    _c("span", { staticClass: "total-amount" }, [
-                      _vm._v("€40.00")
-                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-right spend-summary" }, [
+                  _c("strong", [_vm._v("Total spend: ")]),
+                  _c("span", { staticClass: "total-amount" }, [
+                    _vm._v("€40.00")
                   ])
                 ])
               ])
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4"
-        },
-        [
-          _c("div", { staticClass: "cell product" }, [
-            _c("div", { staticClass: "product-inside" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "https://api.fnkr.net/testimg/350x350/00CED1/FFF/?text=img+placeholder",
-                  alt: "Popcorn"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "hover-add-to-cart" }, [
-                _c(
-                  "div",
-                  { staticClass: "input-group plus-minus-input align-center" },
-                  [
-                    _c("div", { staticClass: "input-group-button" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button circle",
-                          attrs: {
-                            type: "button",
-                            "data-quantity": "minus",
-                            "data-field": "quantity"
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-minus",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "input-group-field",
-                      attrs: { type: "number", name: "quantity", value: "1" }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group-button" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "button circle",
-                          attrs: {
-                            type: "button",
-                            "data-quantity": "plus",
-                            "data-field": "quantity"
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-plus",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "add-to-cart-button", attrs: { href: "#" } },
-                  [_c("i", { staticClass: "fas fa-cart-plus" })]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "price-tag" }, [_vm._v("€30.00")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-name" }, [
-              _c("p", [_vm._v("Popcorn")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "add-to-cart-button", attrs: { href: "#" } },
+      [_c("i", { staticClass: "fas fa-cart-plus" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-section" }, [
+      _c("div", { staticClass: "grid-x grid-padding-x " }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "cell medium-6 total-section text-right medium-text-left"
+          },
+          [
+            _c("p", [
+              _c("strong", [_vm._v("Total spend: ")]),
+              _c("span", { staticClass: "total-amount" }, [_vm._v("€40.00")])
             ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "review-section" }, [
-        _c("div", { staticClass: "grid-x grid-padding-x " }, [
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "cell medium-6 text-right" }, [
           _c(
-            "div",
-            {
-              staticClass:
-                "cell medium-6 total-section text-right medium-text-left"
-            },
-            [
-              _c("p", [
-                _c("strong", [_vm._v("Total spend: ")]),
-                _c("span", { staticClass: "total-amount" }, [_vm._v("€40.00")])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "cell medium-6 text-right" }, [
-            _c(
-              "a",
-              { staticClass: "button round-icon large", attrs: { href: "#" } },
-              [_vm._v("Checkout")]
-            )
-          ])
+            "a",
+            { staticClass: "button round-icon large", attrs: { href: "#" } },
+            [_vm._v("Checkout")]
+          )
         ])
       ])
     ])

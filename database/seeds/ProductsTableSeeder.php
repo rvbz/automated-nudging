@@ -42,7 +42,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([
-            'name' => 'Cold drink, Milkshake',
+            'name' => 'Icedrink',
             'price' => 8.00
         ]);
 
