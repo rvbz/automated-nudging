@@ -13978,6 +13978,97 @@ html.is-reveal-open body {
   margin-top: 0.5555555556rem;
 }
 
+.checkout table {
+  margin-top: 2rem;
+}
+.checkout table td, .checkout table th {
+  border-right: 1px solid #f1f1f1;
+}
+.checkout .auto-addition-checkout {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  background: #ec86b3;
+  border: none;
+}
+.checkout .auto-addition-checkout tbody, .checkout .auto-addition-checkout tr, .checkout .auto-addition-checkout td {
+  background: #ec86b3;
+  border: none;
+  color: #fefefe;
+}
+.checkout .auto-addition-checkout .cheese-text {
+  font-size: 1.3333333333rem;
+  /*======================================================
+  =            All product background in here            =
+  ======================================================*/
+  /*=====  End of All product background in here  ======*/
+}
+.checkout .auto-addition-checkout .cheese-text span {
+  font-size: 1.6666666667rem;
+}
+.checkout .auto-addition-checkout .cheese-text.nachos {
+  background: url("../images/products/nachos/nachos-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .switch {
+  margin: 15px auto;
+  text-align: center;
+}
+.checkout .auto-addition-checkout .switch label {
+  border-radius: 100px;
+}
+.checkout .auto-addition-checkout .switch label:after {
+  border-radius: 100%;
+}
+.checkout .auto-addition-checkout .switch label .switch-active {
+  left: 15%;
+}
+.checkout .auto-addition-checkout .switch label .switch-inactive {
+  right: 15%;
+}
+.checkout .auto-addition-checkout .switch input:checked ~ .switch-paddle {
+  background: #359bd4;
+}
+.checkout .review-checkout {
+  margin-top: 3.5rem;
+}
+.checkout .review-checkout h4 {
+  color: #0a0a0a;
+}
+.checkout .review-checkout .finish-button {
+  margin-top: 2rem;
+}
+
+.plus-minus-input {
+  -webkit-box-align: center;
+          align-items: center;
+}
+.plus-minus-input .input-group-field {
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  -webkit-box-flex: 0;
+          flex: 0;
+  min-width: auto;
+  width: 2.7777777778rem;
+  height: 2.7777777778rem;
+  border-radius: 50%;
+  background: #359bd4;
+  border: none;
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1.4444444444rem;
+}
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.plus-minus-input .input-group-button .circle {
+  border-radius: 50%;
+  padding: 0.2777777778rem;
+  background: #fefefe;
+  color: #359bd4;
+}
+
 .footer {
   background: #222222;
   padding-top: 2rem;

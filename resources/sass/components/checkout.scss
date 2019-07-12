@@ -1,0 +1,81 @@
+.checkout {
+	table {
+		margin-top: $global-margin * 2;
+
+		td, th {
+			border-right: $table-border;
+		}
+	}
+
+	.auto-addition-checkout {
+		margin-top: $global-margin * 2;
+		margin-bottom: $global-margin;
+
+		background: lighten($primary-color, 15%);
+		border: none;
+
+		tbody, tr, td {
+			background: lighten($primary-color, 15%);
+			border: none;
+			color: $white;
+		}
+
+		.cheese-text {
+			font-size: rem-calc(24);
+			span {
+				font-size: rem-calc(30);
+			}
+
+			/*======================================================
+			=            All product background in here            =
+			======================================================*/
+			
+			&.nachos {
+				background: url('../images/products/nachos/nachos-check-box.png') right top no-repeat;
+			}
+			
+			/*=====  End of All product background in here  ======*/
+			
+		}
+
+		.switch {
+			margin: 15px auto;
+    		text-align: center;
+
+    		label {
+				border-radius: 100px;
+
+    			&:after{
+    				border-radius: 100%;
+    			}
+
+    			.switch-active {
+    				left: 15%;
+    			}
+    			.switch-inactive {
+    				right: 15%;
+    			}
+
+    			// @include switch-paddle;
+    		}
+
+    		input {
+    			&:checked ~ .switch-paddle {
+    				background: $secondary-color;
+    			}
+    		}
+		}
+	}
+
+	.review-checkout {
+		margin-top: $global-margin * 3 + .5;
+
+		h4 {
+			color: $body-font-color;
+		}
+
+		.finish-button {
+			margin-top: $global-margin * 2;
+		}
+	}
+}
