@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ShowWelcomePage');
 
 Route::get('/checkout', function() {
 	return view('checkout');
