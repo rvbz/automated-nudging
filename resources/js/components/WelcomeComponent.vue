@@ -115,9 +115,24 @@
                 return string.toLowerCase();
             },
 
+            // Discount should be in percentage eg. 10 = 10%
             addToCart(product, discount = 0) {
-                // First add the product to cart array
-                this.cart.push({'product': product.name, 'qty': product.qty, 'unit_price': product.price});
+                // First check if the array contains already the product
+                var productIndex = this.cart.findIndex(x => x.product === product.name);
+                var productPrice = product.price;
+
+                if (productIndex >= 0) {
+                    // product exists already in the cart, delete it first to add it again
+                    this.cart.splice(productIndex, 1);
+                }
+
+                // Now check for any discount
+                if (discount > 0) {
+                    productPrice = productPrice - (productPrice * discount/100);
+                }
+
+                // add the product to cart array
+                this.cart.push({'product': product.name, 'qty': product.qty, 'unit_price': productPrice});
 
                 // Now get total price
                 this.getGrandTotal();
