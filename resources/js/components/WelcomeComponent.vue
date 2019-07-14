@@ -9,7 +9,7 @@
                     <div class="shopping-cart-wrapper">
                         <div class="counter grid-x align-right">
                             <div class="cell shrink item-counter">
-                               <strong class="number-of-items">0</strong>
+                               <strong class="number-of-items">{{ cart.length }}</strong>
                             </div>
                             <div class=" cell shrink cart-icon">
                                 <i class="fas fa-shopping-cart"></i>
@@ -47,22 +47,18 @@
                         <img :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-grid.png'" :alt="product.name">
 
                         <div class="hover-add-to-cart">
-                            <!-- Change the `data-field` of buttons and `name` of input field's for multiple plus minus buttons-->
-                            <div class="input-group plus-minus-input align-center">
-                                <div class="input-group-button">
-                                    <button type="button" class="button circle" data-quantity="minus" :data-field="'quantity-'+ toLowerCase(product.name)">
-                                      <i class="fas fa-minus" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                <input class="input-group-field" type="number" :name="'quantity-'+ toLowerCase(product.name)" value="1">
-                                <div class="input-group-button">
-                                    <button type="button" class="button circle" data-quantity="plus" :data-field="'quantity-'+ toLowerCase(product.name)">
-                                      <i class="fas fa-plus" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
 
-                            <a href="#" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
+                            <integer-plusminus :min="1" v-model="product.qty">
+                                <template slot="decrement">
+                                    <i class="fas fa-minus" aria-hidden="true"></i>
+                                </template>
+
+                                <template slot="increment">
+                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                </template>
+                            </integer-plusminus>
+
+                            <a href="#" @click.prevent="addToCart(product)" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
 
                             <div class="price-tag">€{{ product.price }}</div>
                         </div>
@@ -90,23 +86,38 @@
 </template>
 
 <script>
+    import { IntegerPlusminus } from 'vue-integer-plusminus'
+
     export default {
+        components: { IntegerPlusminus },
+
         mounted() {
             // Get all products
             var $this = this;
             axios.get('api/products/all').then(function(response){
-              $this.products = response.data;
+
+                // Need to add qty property to every product retrieved 
+                var result = response.data;
+
+                result.forEach(function(element) { element.qty = 1; });
+
+                $this.products = result;
             });
         },
         data() {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 products: [],
+                cart: [],
             }
         },
         methods: {
             toLowerCase(string) {
                 return string.toLowerCase();
+            },
+
+            addToCart(product, discount = 0) {
+
             }
         },
     }

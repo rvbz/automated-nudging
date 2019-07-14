@@ -20,13 +20,15 @@ $fa-font-path: '/fonts/font-awesome';
 =            Components            =
 ==================================*/
 
+@import 'components/plus-minus-input';
 @import 'components/button-extend';
+
 @import 'components/hero';
 @import 'components/content';
 @import 'components/cart';
 @import 'components/checkout';
 
-@import 'components/plus-minus-input';
+
 
 @import 'components/footer';
 

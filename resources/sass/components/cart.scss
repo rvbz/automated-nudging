@@ -106,9 +106,9 @@
 					left: 15%;
 				}
 
-				.plus-minus-input {
+				.plus-minus-input, .int-pm {
 					align-items: center;
-					display: none;
+					display: none !important;
 
 					.input-group-field {
 					    text-align: center;
@@ -175,8 +175,8 @@
 					transition: background .4s;
 
 
-					.plus-minus-input {
-						display: flex;
+					.plus-minus-input, .int-pm {
+						display: flex !important;
 					}
 
 					.add-to-cart-button {

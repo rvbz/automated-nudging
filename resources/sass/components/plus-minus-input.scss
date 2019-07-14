@@ -1,5 +1,8 @@
-.plus-minus-input {
+.plus-minus-input, .int-pm {
+	display: flex !important;
 	align-items: center;
+	justify-content: center;
+	margin-bottom: $global-margin;
 
 
 	.input-group-field {
@@ -33,5 +36,35 @@
 	      background: $white;
 	      color: $secondary-color;
 	    }
+	}
+
+
+	div {
+		display: flex !important;
+		border-radius: 50%;
+
+
+		&.int-pm-value {
+			margin-left: $global-margin / 2;
+			margin-right: $global-margin / 2;
+
+			border: none !important;
+		    color: $white;
+		    font-weight: bold;
+		    font-size: rem-calc(26);
+		    background: $secondary-color !important;
+		    width: rem-calc(50);
+	    	height: rem-calc(50);
+	    	display: block !important;
+	    	padding: rem-calc(7) !important;
+		}
+
+		&.int-pm-btn {
+			border: none !important;
+			background: $white !important;
+			color: $secondary-color;
+			padding: rem-calc(5) !important;
+		}
+
 	}
 }

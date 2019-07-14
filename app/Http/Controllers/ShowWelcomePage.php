@@ -26,4 +26,13 @@ class ShowWelcomePage extends Controller
 
         return response()->json($products);
     }
+
+    /**
+     *
+     * Get a random nudge to use
+     *
+     */
+    public function getNudge() {
+
+    }
 }

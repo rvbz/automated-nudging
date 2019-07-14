@@ -13665,6 +13665,68 @@ html.is-reveal-open body {
 /*==================================
 =            Components            =
 ==================================*/
+.plus-minus-input, .int-pm {
+  display: -webkit-box !important;
+  display: flex !important;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  margin-bottom: 1rem;
+}
+.plus-minus-input .input-group-field, .int-pm .input-group-field {
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  -webkit-box-flex: 0;
+          flex: 0;
+  min-width: auto;
+  width: 2.7777777778rem;
+  height: 2.7777777778rem;
+  border-radius: 50%;
+  background: #359bd4;
+  border: none;
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1.4444444444rem;
+}
+.plus-minus-input .input-group-field::-webkit-inner-spin-button,
+.plus-minus-input .input-group-field ::-webkit-outer-spin-button, .int-pm .input-group-field::-webkit-inner-spin-button,
+.int-pm .input-group-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.plus-minus-input .input-group-button .circle, .int-pm .input-group-button .circle {
+  border-radius: 50%;
+  padding: 0.2777777778rem;
+  background: #fefefe;
+  color: #359bd4;
+}
+.plus-minus-input div, .int-pm div {
+  display: -webkit-box !important;
+  display: flex !important;
+  border-radius: 50%;
+}
+.plus-minus-input div.int-pm-value, .int-pm div.int-pm-value {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: none !important;
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1.4444444444rem;
+  background: #359bd4 !important;
+  width: 2.7777777778rem;
+  height: 2.7777777778rem;
+  display: block !important;
+  padding: 0.3888888889rem !important;
+}
+.plus-minus-input div.int-pm-btn, .int-pm div.int-pm-btn {
+  border: none !important;
+  background: #fefefe !important;
+  color: #359bd4;
+  padding: 0.2777777778rem !important;
+}
+
 .button.round-icon {
   border-radius: 100px;
   font-weight: bold;
@@ -13906,12 +13968,12 @@ html.is-reveal-open body {
   bottom: 8%;
   left: 15%;
 }
-.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input {
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input, .products-wrapper .cell.product .product-inside .hover-add-to-cart .int-pm {
   -webkit-box-align: center;
           align-items: center;
-  display: none;
+  display: none !important;
 }
-.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field {
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field, .products-wrapper .cell.product .product-inside .hover-add-to-cart .int-pm .input-group-field {
   text-align: center;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -13928,11 +13990,12 @@ html.is-reveal-open body {
   font-size: 1.4444444444rem;
 }
 .products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field::-webkit-inner-spin-button,
-.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field ::-webkit-outer-spin-button {
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-field ::-webkit-outer-spin-button, .products-wrapper .cell.product .product-inside .hover-add-to-cart .int-pm .input-group-field::-webkit-inner-spin-button,
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .int-pm .input-group-field ::-webkit-outer-spin-button {
   -webkit-appearance: none;
           appearance: none;
 }
-.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-button .circle {
+.products-wrapper .cell.product .product-inside .hover-add-to-cart .plus-minus-input .input-group-button .circle, .products-wrapper .cell.product .product-inside .hover-add-to-cart .int-pm .input-group-button .circle {
   border-radius: 50%;
   padding: 0.2777777778rem;
   background: #fefefe;
@@ -13962,9 +14025,9 @@ html.is-reveal-open body {
   -webkit-transition: background 0.4s;
   transition: background 0.4s;
 }
-.products-wrapper .cell.product:hover .product-inside .hover-add-to-cart .plus-minus-input {
-  display: -webkit-box;
-  display: flex;
+.products-wrapper .cell.product:hover .product-inside .hover-add-to-cart .plus-minus-input, .products-wrapper .cell.product:hover .product-inside .hover-add-to-cart .int-pm {
+  display: -webkit-box !important;
+  display: flex !important;
 }
 .products-wrapper .cell.product:hover .product-inside .hover-add-to-cart .add-to-cart-button {
   display: inline-block;
@@ -14035,38 +14098,6 @@ html.is-reveal-open body {
 }
 .checkout .review-checkout .finish-button {
   margin-top: 2rem;
-}
-
-.plus-minus-input {
-  -webkit-box-align: center;
-          align-items: center;
-}
-.plus-minus-input .input-group-field {
-  text-align: center;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  -webkit-box-flex: 0;
-          flex: 0;
-  min-width: auto;
-  width: 2.7777777778rem;
-  height: 2.7777777778rem;
-  border-radius: 50%;
-  background: #359bd4;
-  border: none;
-  color: #fefefe;
-  font-weight: bold;
-  font-size: 1.4444444444rem;
-}
-.plus-minus-input .input-group-field::-webkit-inner-spin-button,
-.plus-minus-input .input-group-field ::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-          appearance: none;
-}
-.plus-minus-input .input-group-button .circle {
-  border-radius: 50%;
-  padding: 0.2777777778rem;
-  background: #fefefe;
-  color: #359bd4;
 }
 
 .footer {
