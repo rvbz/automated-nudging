@@ -1957,8 +1957,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1980,7 +1978,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       products: [],
-      cart: []
+      cart: [],
+      grandTotal: 0.00
     };
   },
   methods: {
@@ -1989,6 +1988,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     addToCart: function addToCart(product) {
       var discount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      // First add the product to cart array
+      this.cart.push({
+        'product': product.name,
+        'qty': product.qty,
+        'unit_price': product.price
+      }); // Now get total price
+
+      this.getGrandTotal();
+    },
+    getGrandTotal: function getGrandTotal() {
+      var total = 0.00;
+      this.cart.forEach(function (element) {
+        total += element.qty * element.unit_price;
+      });
+      this.grandTotal = total.toFixed(2);
     }
   }
 });
@@ -45640,11 +45654,41 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: " cell shrink cart-icon" }, [
+              _c("i", { staticClass: "fas fa-shopping-cart" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "cart-summary" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("table", { staticClass: "unstriped" }, [
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.cart, function(product) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(product.product))]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(product.qty))
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-right spend-summary" }, [
+                  _c("strong", [_vm._v("Total spend: ")]),
+                  _c("span", { staticClass: "total-amount" }, [
+                    _vm._v("€" + _vm._s(_vm.grandTotal))
+                  ])
+                ])
+              ])
+            ])
           ])
         ])
       ])
     ]),
+    _vm._v("\n\n    " + _vm._s(_vm.cart) + "\n\n    "),
     _vm._v(" "),
     _c(
       "div",
@@ -45732,7 +45776,27 @@ var render = function() {
       0
     ),
     _vm._v(" "),
-    _vm._m(2)
+    _c("div", { staticClass: "review-section" }, [
+      _c("div", { staticClass: "grid-x grid-padding-x " }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "cell medium-6 total-section text-right medium-text-left"
+          },
+          [
+            _c("p", [
+              _c("strong", [_vm._v("Total spend: ")]),
+              _c("span", { staticClass: "total-amount" }, [
+                _vm._v("€" + _vm._s(_vm.grandTotal))
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(2)
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -45756,65 +45820,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " cell shrink cart-icon" }, [
-      _c("i", { staticClass: "fas fa-shopping-cart" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "cart-summary" }, [
-        _c("p", [
-          _c("strong", [_vm._v("Your selected snacks for the movie:")])
-        ]),
-        _vm._v(" "),
-        _c("table", { staticClass: "unstriped" }, [
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("Hotdog")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [_vm._v("1")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Soda")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [_vm._v("1")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text-right spend-summary" }, [
-          _c("strong", [_vm._v("Total spend: ")]),
-          _c("span", { staticClass: "total-amount" }, [_vm._v("€40.00")])
-        ])
-      ])
+    return _c("p", [
+      _c("strong", [_vm._v("Your selected snacks for the movie:")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "review-section" }, [
-      _c("div", { staticClass: "grid-x grid-padding-x " }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "cell medium-6 total-section text-right medium-text-left"
-          },
-          [
-            _c("p", [
-              _c("strong", [_vm._v("Total spend: ")]),
-              _c("span", { staticClass: "total-amount" }, [_vm._v("€40.00")])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "cell medium-6 text-right" }, [
-          _c(
-            "a",
-            { staticClass: "button round-icon large", attrs: { href: "#" } },
-            [_vm._v("Checkout")]
-          )
-        ])
-      ])
+    return _c("div", { staticClass: "cell medium-6 text-right" }, [
+      _c(
+        "a",
+        { staticClass: "button round-icon large", attrs: { href: "#" } },
+        [_vm._v("Checkout")]
+      )
     ])
   }
 ]

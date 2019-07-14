@@ -18,19 +18,15 @@
                                     <p><strong>Your selected snacks for the movie:</strong></p>
                                     <table class="unstriped">
                                         <tbody>
-                                            <tr>
-                                                <td>Hotdog</td>
-                                                <td class="text-center">1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Soda</td>
-                                                <td class="text-center">1</td>
+                                            <tr v-for="product in cart">
+                                                <td>{{ product.product }}</td>
+                                                <td class="text-center">{{ product.qty }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
 
                                     <p class="text-right spend-summary">
-                                        <strong>Total spend: </strong><span class="total-amount">€40.00</span>
+                                        <strong>Total spend: </strong><span class="total-amount">€{{ grandTotal }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -39,6 +35,8 @@
                     </div>
                 </div>
             </div>
+
+            {{ cart }}
 
             <!-- Product grid -->
             <div class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
@@ -75,7 +73,7 @@
             <div class="review-section">
                 <div class="grid-x grid-padding-x ">
                     <div class="cell medium-6 total-section text-right medium-text-left">
-                        <p><strong>Total spend: </strong><span class="total-amount">€40.00</span></p>
+                        <p><strong>Total spend: </strong><span class="total-amount">€{{ grandTotal }}</span></p>
                     </div>
                     <div class="cell medium-6 text-right">
                         <a href="#" class="button round-icon large">Checkout</a>
@@ -109,6 +107,7 @@
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 products: [],
                 cart: [],
+                grandTotal: 0.00,
             }
         },
         methods: {
@@ -117,7 +116,21 @@
             },
 
             addToCart(product, discount = 0) {
+                // First add the product to cart array
+                this.cart.push({'product': product.name, 'qty': product.qty, 'unit_price': product.price});
 
+                // Now get total price
+                this.getGrandTotal();
+            },
+
+            getGrandTotal() {
+                var total = 0.00;
+
+                this.cart.forEach(function(element){
+                    total += element.qty * element.unit_price;
+                });
+
+                this.grandTotal = total.toFixed(2);
             }
         },
     }
