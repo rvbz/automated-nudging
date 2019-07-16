@@ -9,4 +9,21 @@ class Product extends Model
     //
 
     public $timestamps = false;
+
+    // Add a new attribute
+    protected $appends = ['slow-moving'];
+
+    /**
+	 * Get the slow moving attribute of a product.
+	 *
+	 * @return boolean
+	 */
+	public function getSlowMovingAttribute()
+	{
+	    if ($this->name == "Candies") {
+	    	return true;
+	    } else {
+	    	return false;
+	    }
+	}
 }

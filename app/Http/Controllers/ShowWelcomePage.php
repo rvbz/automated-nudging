@@ -23,7 +23,9 @@ class ShowWelcomePage extends Controller
     }
 
     public function getAllProducts() {
+        // Get a list of available products
         $products = Product::all();
+
 
         return response()->json($products);
     }
