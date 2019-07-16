@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Nudge;
 
 class ShowWelcomePage extends Controller
 {
@@ -33,6 +34,8 @@ class ShowWelcomePage extends Controller
      *
      */
     public function getNudge() {
+        $nudge = Nudge::inRandomOrder()->first();
 
+        return response()->json($nudge);
     }
 }

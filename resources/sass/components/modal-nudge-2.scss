@@ -1,0 +1,27 @@
+#product-discount {
+	padding: 0;
+
+	.content-wrap {
+		padding: $global-padding;
+
+		h3 {
+			margin-top: $global-margin;
+		}
+		
+
+		.controls {
+			margin-top: $global-margin * 2;
+		}
+	}
+
+	.image-background {
+		@include breakpoint(small only) {
+			height: rem-calc(250);
+		}
+
+		&.candies {
+			background: url('../images/products/candies/candies-modal.jpg') center center;
+			background-size: cover;
+		}
+	}
+}

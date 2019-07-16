@@ -20,8 +20,30 @@
 		}
 
 		&:hover {
-			font-size: 1.30rem;
-			transition: all .4s;
+			// font-size: 1.30rem;
+			// transition: all .4s;
 		} 
+	}
+
+	&.condensed {
+		padding: 0 0 0 $global-padding / 2;
+
+		&:after {
+			margin-left: $global-margin / 3;
+		}
+	}
+
+	&.add-cart-icon {
+		&:after {
+			content: "\F217";
+		}
+	}
+
+	&.secondary-color {
+		background: lighten($secondary-color, 15%);
+
+		&:after {
+			background: $secondary-color;
+		}
 	}
 }

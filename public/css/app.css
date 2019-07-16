@@ -13745,10 +13745,20 @@ html.is-reveal-open body {
   border-radius: 50%;
   padding: 0.5555555556rem;
 }
-.button.round-icon:hover {
-  font-size: 1.3rem;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
+.button.condensed {
+  padding: 0 0 0 0.5rem;
+}
+.button.condensed:after {
+  margin-left: 0.3333333333rem;
+}
+.button.add-cart-icon:after {
+  content: "\F217";
+}
+.button.secondary-color {
+  background: #74bae1;
+}
+.button.secondary-color:after {
+  background: #359bd4;
 }
 
 .hero {
@@ -14098,6 +14108,28 @@ html.is-reveal-open body {
 }
 .checkout .review-checkout .finish-button {
   margin-top: 2rem;
+}
+
+#product-discount {
+  padding: 0;
+}
+#product-discount .content-wrap {
+  padding: 1rem;
+}
+#product-discount .content-wrap h3 {
+  margin-top: 1rem;
+}
+#product-discount .content-wrap .controls {
+  margin-top: 2rem;
+}
+@media screen and (max-width: 39.99875em) {
+  #product-discount .image-background {
+    height: 13.8888888889rem;
+  }
+}
+#product-discount .image-background.candies {
+  background: url("../images/products/candies/candies-modal.jpg") center center;
+  background-size: cover;
 }
 
 .footer {

@@ -1957,21 +1957,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     IntegerPlusminus: vue_integer_plusminus__WEBPACK_IMPORTED_MODULE_0__["IntegerPlusminus"]
   },
   mounted: function mounted() {
-    // Get all products
+    $(this.$el).foundation(); // Get all products
+
     var $this = this;
-    axios.get('api/products/all').then(function (response) {
-      // Need to add qty property to every product retrieved 
-      var result = response.data;
-      result.forEach(function (element) {
-        element.qty = 1;
+    axios.get('api/nudges/getanudge').then(function (res) {
+      $this.nudge = res.data;
+      axios.get('api/products/all').then(function (response) {
+        // Need to add qty property to every product retrieved 
+        var result = response.data;
+        result.forEach(function (element) {
+          element.qty = 1;
+        });
+        $this.products = result;
       });
-      $this.products = result;
     });
   },
   data: function data() {
@@ -1979,7 +2013,13 @@ __webpack_require__.r(__webpack_exports__);
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       products: [],
       cart: [],
-      grandTotal: 0.00
+      nudge: [],
+      grandTotal: 0.00,
+      slowProduct: {
+        "id": 5,
+        "name": "Candies",
+        "price": "4.00"
+      }
     };
   },
   methods: {
@@ -2003,6 +2043,11 @@ __webpack_require__.r(__webpack_exports__);
 
       if (discount > 0) {
         productPrice = productPrice - productPrice * discount / 100;
+      } // Check if the product comes with a Qty, if not, most likely comes from a nudge so, it will be automatically 1
+
+
+      if (!("qty" in product)) {
+        product['qty'] = 1;
       } // add the product to cart array
 
 
@@ -2020,6 +2065,22 @@ __webpack_require__.r(__webpack_exports__);
         total += element.qty * element.unit_price;
       });
       this.grandTotal = total.toFixed(2);
+    },
+    checkout: function checkout() {
+      var _this = this;
+
+      // check if the slow-moving product hasnt been already added to the cart
+      // if not offer the nudge
+      var productIndex = this.cart.findIndex(function (x) {
+        return x.product === _this.slowProduct.name;
+      });
+
+      if (productIndex >= 0) {// product exists already in the cart, nothing to do, proceed to checkout
+        // SEND TO CHECKOUT PAGE
+      } else {
+        // product not in cart list, present nudge
+        $("#product-discount").foundation('open');
+      }
     }
   }
 });
@@ -45705,7 +45766,9 @@ var render = function() {
         ])
       ])
     ]),
-    _vm._v("\n\n    " + _vm._s(_vm.cart) + "\n\n    "),
+    _vm._v(
+      "\n\n    " + _vm._s(_vm.cart) + "\n    " + _vm._s(_vm.nudge) + "\n\n    "
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -45811,9 +45874,95 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(2)
+        _c("div", { staticClass: "cell medium-6 text-right" }, [
+          _c(
+            "a",
+            {
+              staticClass: "button round-icon large",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.checkout()
+                }
+              }
+            },
+            [_vm._v("Checkout")]
+          )
+        ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "reveal",
+        attrs: { id: "product-discount", "data-reveal": "" }
+      },
+      [
+        _c("div", { staticClass: "grid-x grid-padding-x " }, [
+          _c("div", {
+            class:
+              "cell medium-6 image-background " +
+              _vm.toLowerCase(_vm.slowProduct.name)
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "cell medium-6 content-wrap" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-center" }, [
+              _vm._v(
+                "You can add some " +
+                  _vm._s(_vm.slowProduct.name) +
+                  " to your cart with:"
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "grid-x grid-padding-x controls" }, [
+              _c("div", { staticClass: "cell small-6" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "clear button secondary",
+                    attrs: {
+                      href: "#",
+                      "data-close": "",
+                      "aria-label": "Close modal"
+                    },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
+                  [_vm._v("No thanks")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "cell small-6 text-right" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "button round-icon secondary-color add-cart-icon",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.addToCart(_vm.slowProduct, 10)
+                      }
+                    }
+                  },
+                  [_vm._v("Add it")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -45845,12 +45994,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cell medium-6 text-right" }, [
-      _c(
-        "a",
-        { staticClass: "button round-icon large", attrs: { href: "#" } },
-        [_vm._v("Checkout")]
-      )
+    return _c("h3", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("It's your lucky day")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("10% OFF")])
     ])
   }
 ]
@@ -58530,44 +58683,6 @@ Vue.component('welcome-component', __webpack_require__(/*! ./components/WelcomeC
 
 var app = new Vue({
   el: '#app'
-});
-/*----------  Plus / Minus input  ----------*/
-
-jQuery(document).ready(function () {
-  // This button will increment the value
-  $('[data-quantity="plus"]').click(function (e) {
-    // Stop acting like a button
-    e.preventDefault(); // Get the field name
-
-    fieldName = $(this).attr('data-field'); // Get its current value
-
-    var currentVal = parseInt($('input[name=' + fieldName + ']').val()); // If is not undefined
-
-    if (!isNaN(currentVal)) {
-      // Increment
-      $('input[name=' + fieldName + ']').val(currentVal + 1);
-    } else {
-      // Otherwise put a 0 there
-      $('input[name=' + fieldName + ']').val(0);
-    }
-  }); // This button will decrement the value till 0
-
-  $('[data-quantity="minus"]').click(function (e) {
-    // Stop acting like a button
-    e.preventDefault(); // Get the field name
-
-    fieldName = $(this).attr('data-field'); // Get its current value
-
-    var currentVal = parseInt($('input[name=' + fieldName + ']').val()); // If it isn't undefined or its greater than 0
-
-    if (!isNaN(currentVal) && currentVal > 0) {
-      // Decrement one
-      $('input[name=' + fieldName + ']').val(currentVal - 1);
-    } else {
-      // Otherwise put a 0 there
-      $('input[name=' + fieldName + ']').val(0);
-    }
-  });
 });
 
 /***/ }),

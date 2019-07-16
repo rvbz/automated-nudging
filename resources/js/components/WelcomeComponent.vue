@@ -37,6 +37,7 @@
             </div>
 
             {{ cart }}
+            {{ nudge }}
 
             <!-- Product grid -->
             <div class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
@@ -76,10 +77,39 @@
                         <p><strong>Total spend: </strong><span class="total-amount">€{{ grandTotal }}</span></p>
                     </div>
                     <div class="cell medium-6 text-right">
-                        <a href="#" class="button round-icon large">Checkout</a>
+                        <a href="#" @click.prevent="checkout()" class="button round-icon large">Checkout</a>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="reveal" id="product-discount" data-reveal>
+                <div class="grid-x grid-padding-x ">
+                    <div :class="'cell medium-6 image-background ' + toLowerCase(slowProduct.name)"></div>
+                    <div class="cell medium-6 content-wrap">
+                        <h3 class="text-center"><strong>It's your lucky day</strong></h3>
+
+                        <p class="text-center">You can add some {{ slowProduct.name }} to your cart with:</p>
+
+                        <h2 class="text-center"><strong>10% OFF</strong></h2>
+
+                        <div class="grid-x grid-padding-x controls">
+                            <div class="cell small-6">
+                                <a href="#" class="clear button secondary" @click.prevent="" data-close aria-label="Close modal">No thanks</a>
+                            </div>
+                            <div class="cell small-6 text-right">
+                                <a href="#" @click.prevent="addToCart(slowProduct, 10)" class="button round-icon secondary-color add-cart-icon">Add it</a>
+                            </div>
+                        </div>
+
+                        <!-- <button class="close-button" data-close aria-label="Close modal" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+
         </div>
 </template>
 
@@ -90,16 +120,22 @@
         components: { IntegerPlusminus },
 
         mounted() {
+            $(this.$el).foundation();
+
             // Get all products
             var $this = this;
-            axios.get('api/products/all').then(function(response){
+            axios.get('api/nudges/getanudge').then(function(res){
+                $this.nudge = res.data;
 
-                // Need to add qty property to every product retrieved 
-                var result = response.data;
+                axios.get('api/products/all').then(function(response){
 
-                result.forEach(function(element) { element.qty = 1; });
+                    // Need to add qty property to every product retrieved 
+                    var result = response.data;
 
-                $this.products = result;
+                    result.forEach(function(element) { element.qty = 1; });
+
+                    $this.products = result;
+                });
             });
         },
         data() {
@@ -107,7 +143,9 @@
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 products: [],
                 cart: [],
+                nudge: [],
                 grandTotal: 0.00,
+                slowProduct: {"id":5,"name":"Candies","price":"4.00"}
             }
         },
         methods: {
@@ -131,6 +169,11 @@
                     productPrice = productPrice - (productPrice * discount/100);
                 }
 
+                // Check if the product comes with a Qty, if not, most likely comes from a nudge so, it will be automatically 1
+                if (!("qty" in product)) {
+                    product['qty'] = 1;
+                }
+
                 // add the product to cart array
                 this.cart.push({'product': product.name, 'qty': product.qty, 'unit_price': productPrice});
 
@@ -146,6 +189,22 @@
                 });
 
                 this.grandTotal = total.toFixed(2);
+            },
+
+            checkout() {
+                // check if the slow-moving product hasnt been already added to the cart
+                // if not offer the nudge
+                var productIndex = this.cart.findIndex(x => x.product === this.slowProduct.name);
+
+                if (productIndex >= 0) {
+                    // product exists already in the cart, nothing to do, proceed to checkout
+                    // SEND TO CHECKOUT PAGE
+                } else {
+                    // product not in cart list, present nudge
+                    $("#product-discount").foundation('open');
+                }
+
+                
             }
         },
     }
