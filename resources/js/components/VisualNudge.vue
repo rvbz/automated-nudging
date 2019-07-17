@@ -38,42 +38,17 @@
 
             {{ cart }}
 
-            <div class="masonry-css products-wrapper">
-              <div class="masonry-css-item product" v-for="product in products">
-                <div class="product-inside">
-                    <img :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-grid.png'" :alt="product.name">
+            
 
-                    <div class="hover-add-to-cart">
-
-                        <integer-plusminus :min="1" v-model="product.qty">
-                            <template slot="decrement">
-                                <i class="fas fa-minus" aria-hidden="true"></i>
-                            </template>
-
-                            <template slot="increment">
-                                <i class="fas fa-plus" aria-hidden="true"></i>
-                            </template>
-                        </integer-plusminus>
-
-                        <a href="#" @click.prevent="addToCart(product)" class="add-to-cart-button"><i class="fas fa-cart-plus"></i></a>
-
-                        <div class="price-tag">€{{ product.price }}</div>
-                    </div>
-                </div>
-                <div class="product-name">
-                    <p>{{ product.name }}</p>
-                </div>
-              </div>
-              
-            </div>
-
-
-
-            <!-- Product grid -->
-            <div class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
-                <div class="cell product" v-for="product in products">
+            <!-- Product Masonry -->
+            <div v-masonry transition-duration="0.3s" item-selector=".product" column-width=".item-sizer" class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
+                <div class="item-sizer"></div>
+                <div v-masonry-tile class="cell product" v-for="(product, index) in products" v-bind:class="{ 'item--width2': (product.slow_moving==1 && product.visual_nudge_mode == 'Landscape') }">
                     <div class="product-inside">
-                        <img :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-grid.png'" :alt="product.name">
+
+                        <img v-if="product.slow_moving==1" :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-masonry.jpg'" :alt="product.name">
+
+                        <img v-else :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-grid.png'" :alt="product.name">
 
                         <div class="hover-add-to-cart">
 
@@ -117,6 +92,10 @@
 
 <script>
     import { IntegerPlusminus } from 'vue-integer-plusminus';
+    import Masonry from 'masonry-layout'
+    import {VueMasonryPlugin} from 'vue-masonry';
+
+    Vue.use(VueMasonryPlugin);
 
     export default {
         components: { 

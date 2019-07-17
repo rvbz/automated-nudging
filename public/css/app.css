@@ -13948,8 +13948,14 @@ html.is-reveal-open body {
 .products-wrapper {
   margin-top: 2rem;
 }
+.products-wrapper .item-sizer {
+  width: 25%;
+}
 .products-wrapper .product {
   margin-bottom: 1rem;
+}
+.products-wrapper .product.item--width2 {
+  width: 50%;
 }
 .products-wrapper .product .product-inside {
   position: relative;
@@ -14023,6 +14029,8 @@ html.is-reveal-open body {
   text-align: center;
   -webkit-transition: all 0.6s;
   transition: all 0.6s;
+  position: relative;
+  z-index: 9;
 }
 .products-wrapper .product .product-inside .hover-add-to-cart .add-to-cart-button:hover {
   background: #359bd4;
@@ -14049,6 +14057,13 @@ html.is-reveal-open body {
   font-size: 1.1111111111rem;
   font-weight: bold;
   margin-top: 0.5555555556rem;
+}
+
+.test-masonry .item {
+  width: 25%;
+}
+.test-masonry .item--width2 {
+  width: 50%;
 }
 
 .checkout table {

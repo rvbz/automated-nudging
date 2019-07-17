@@ -13,42 +13,50 @@ class ProductsTableSeeder extends Seeder
     {
         DB::table('products')->insert([
             'name' => 'Popcorn',
-            'price' => 7.00
+            'price' => 7.00,
+            'visual_nudge_mode' => 'Portrait'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Hotdog',
-            'price' => 6.50
+            'price' => 6.50,
+            'visual_nudge_mode' => 'Landscape'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Nachos',
-            'price' => 7.00
+            'price' => 7.00,
+            'visual_nudge_mode' => 'Landscape'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Icecream',
-            'price' => 4.50
+            'price' => 4.50,
+            'visual_nudge_mode' => 'Landscape'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Candies',
-            'price' => 4.00
+            'price' => 4.00,
+            'visual_nudge_mode' => 'Portrait'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Soda',
-            'price' => 5.50
+            'price' => 5.50,
+            'visual_nudge_mode' => 'Landscape'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Icedrink',
-            'price' => 8.00
+            'price' => 8.00,
+            'visual_nudge_mode' => 'Landscape'
         ]);
 
         DB::table('products')->insert([
             'name' => 'Water',
-            'price' => 2.50
+            'price' => 2.50,
+            'visual_nudge_mode' => 'Portrait'
         ]);
     }
 }

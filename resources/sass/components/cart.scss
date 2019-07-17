@@ -75,8 +75,16 @@
 .products-wrapper {
 	margin-top: $global-margin * 2;
 
+	.item-sizer {
+		width: 25%;
+	}
+
 	.product {
 		margin-bottom: $global-margin;
+
+		&.item--width2 {
+			width: 50%;
+		}
 
 		.product-inside{
 			position: relative;
@@ -155,6 +163,8 @@
 				    padding: rem-calc(10);
 				    text-align: center;
 				    transition: all .6s;
+				    position: relative;
+				    z-index: 9;
 
 				    &:hover {
 				    	background: $secondary-color;
@@ -196,4 +206,9 @@
 			margin-top: rem-calc(10);
 		}
 	}
+}
+
+.test-masonry {
+	.item { width: 25%; }
+	.item--width2 { width: 50%; }
 }
