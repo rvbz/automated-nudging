@@ -43,7 +43,7 @@
             <!-- Product Masonry -->
             <div v-masonry transition-duration="0.3s" item-selector=".product" column-width=".item-sizer" class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
                 <div class="item-sizer"></div>
-                <div v-masonry-tile class="cell product" v-for="(product, index) in products" v-bind:class="{ 'item--width2': (product.slow_moving==1 && product.visual_nudge_mode == 'Landscape') }">
+                <div v-masonry-tile class="cell product" v-for="(product, index) in sortArrays(products, 'slow_moving', 'desc')" v-bind:class="{ 'item--width2': (product.slow_moving==1 && product.visual_nudge_mode == 'Landscape') }">
                     <div class="product-inside">
 
                         <img v-if="product.slow_moving==1" :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-masonry.jpg'" :alt="product.name">
@@ -169,8 +169,22 @@
             },
 
             checkout() {
-                
+                // Show loading icon to avoid double clicking
+                this.$parent.isLoading = true;
+
+                // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+                // MODIFY THIS LATER
+                localStorage.setItem('user', JSON.stringify({'csrf': this.$parent.csrf, 'email': 'something@email.com'}));
+
+
                 // SEND TO CHECKOUT PAGE
+                window.location.href = "/checkout";
+            },
+
+            sortArrays(arrays, sortBy, type) {
+                return _.orderBy(arrays, sortBy, type);
             }
         },
     }
