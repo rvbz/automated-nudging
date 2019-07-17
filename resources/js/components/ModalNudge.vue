@@ -85,20 +85,20 @@
 
             <div class="reveal" id="product-discount" data-reveal>
                 <div class="grid-x grid-padding-x ">
-                    <div :class="'cell medium-6 image-background ' + toLowerCase(slowProduct.name)"></div>
+                    <div :class="'cell medium-6 image-background ' + toLowerCase($parent.slowProduct.name)"></div>
                     <div class="cell medium-6 content-wrap">
                         <h3 class="text-center"><strong>It's your lucky day</strong></h3>
 
-                        <p class="text-center">You can add some {{ slowProduct.name }} to your cart with:</p>
+                        <p class="text-center">You can add some {{ $parent.slowProduct.name }} to your cart with:</p>
 
                         <h2 class="text-center"><strong>10% OFF</strong></h2>
 
                         <div class="grid-x grid-padding-x controls">
                             <div class="cell small-6">
-                                <a href="#" class="clear button secondary" @click.prevent="" data-close aria-label="Close modal">No thanks</a>
+                                <a href="#" class="clear button secondary" @click.prevent="goToCheckout()" data-close aria-label="Close modal">No thanks</a>
                             </div>
                             <div class="cell small-6 text-right">
-                                <a href="#" @click.prevent="addToCart(slowProduct, 10)" class="button round-icon secondary-color add-cart-icon">Add it</a>
+                                <a href="#" @click.prevent="addToCart($parent.slowProduct, 10) + goToCheckout()" class="button round-icon secondary-color add-cart-icon">Add it</a>
                             </div>
                         </div>
 
@@ -137,12 +137,7 @@
                 $this.$parent.isLoading = false;
             });
         },
-        props: {
-          slowProduct: {
-                type: Object,
-                required: true
-            },
-        },
+        
         data() {
             return {
                 products: [],
@@ -168,7 +163,7 @@
 
                 // Now check for any discount
                 if (discount > 0) {
-                    productPrice = productPrice - (productPrice * discount/100);
+                    productPrice = (productPrice - (productPrice * discount/100)).toFixed(2);
                 }
 
                 // Check if the product comes with a Qty, if not, most likely comes from a nudge so, it will be automatically 1
@@ -196,17 +191,36 @@
             checkout() {
                 // check if the slow-moving product hasnt been already added to the cart
                 // if not offer the nudge
-                var productIndex = this.cart.findIndex(x => x.product === this.slowProduct.name);
+                var productIndex = this.cart.findIndex(x => x.product === this.$parent.slowProduct.name);
 
                 if (productIndex >= 0) {
                     // product exists already in the cart, nothing to do, proceed to checkout
                     // SEND TO CHECKOUT PAGE
+                    this.goToCheckout();
                 } else {
                     // product not in cart list, present nudge
                     $("#product-discount").foundation('open');
                 }
 
                 
+            },
+            goToCheckout() {
+                // Show loading icon to avoid double clicking
+                this.$parent.isLoading = true;
+
+                // Close any modal is open
+                $("#product-discount").foundation('close');
+
+                // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+                localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct));
+                // MODIFY THIS LATER
+                localStorage.setItem('user', JSON.stringify({'csrf': this.$parent.csrf, 'email': 'something@email.com'}));
+
+
+                // SEND TO CHECKOUT PAGE
+                window.location.href = "/checkout";
             }
         },
     }

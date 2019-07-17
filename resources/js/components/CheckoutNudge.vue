@@ -108,12 +108,6 @@
                 $this.$parent.isLoading = false;
             });
         },
-        props: {
-          slowProduct: {
-                type: Object,
-                required: true
-            },
-        },
         data() {
             return {
                 products: [],
@@ -165,8 +159,19 @@
             },
 
             checkout() {
-                
+                // Show loading icon to avoid double clicking
+                this.$parent.isLoading = true;
+
+                // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+                localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct));
+                // MODIFY THIS LATER
+                localStorage.setItem('user', JSON.stringify({'csrf': this.$parent.csrf, 'email': 'something@email.com'}));
+
+
                 // SEND TO CHECKOUT PAGE
+                window.location.href = "/checkout";
             }
         },
     }

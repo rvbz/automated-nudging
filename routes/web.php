@@ -24,6 +24,7 @@ Route::get('/checkout', function() {
 ===========================*/
 
 Route::get('api/products/all', 'ShowWelcomePage@getAllProducts');
+Route::get('api/products/getslowmoving', 'ShowWelcomePage@getSlowMovingProduct');
 Route::get('api/nudges/getanudge', 'ShowWelcomePage@getNudge');
 
 /*=====  End of API  ======*/

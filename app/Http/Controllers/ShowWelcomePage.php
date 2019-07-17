@@ -40,4 +40,16 @@ class ShowWelcomePage extends Controller
 
         return response()->json($nudge);
     }
+
+    /**
+     *
+     * Get the slow-moving product
+     *
+     */
+    public function getSlowMovingProduct() {
+        // NEE TO CHANGE THIS FOR A LOGIC GETTING
+        $product = Product::inRandomOrder()->first();
+
+        return response()->json($product);
+    }
 }

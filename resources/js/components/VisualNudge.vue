@@ -43,10 +43,10 @@
             <!-- Product Masonry -->
             <div v-masonry transition-duration="0.3s" item-selector=".product" column-width=".item-sizer" class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
                 <div class="item-sizer"></div>
-                <div v-masonry-tile class="cell product" v-for="(product, index) in sortArrays(products, 'slow_moving', 'desc')" v-bind:class="{ 'item--width2': (product.slow_moving==1 && product.visual_nudge_mode == 'Landscape') }">
+                <div v-masonry-tile class="cell product" v-for="(product, index) in sortedArray" v-bind:class="{ 'item--width2': (product.name==$parent.slowProduct.name && product.visual_nudge_mode == 'Landscape') }">
                     <div class="product-inside">
 
-                        <img v-if="product.slow_moving==1" :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-masonry.jpg'" :alt="product.name">
+                        <img v-if="product.name==$parent.slowProduct.name" :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-masonry.jpg'" :alt="product.name">
 
                         <img v-else :src="'/images/products/'+ toLowerCase(product.name) +'/'+ toLowerCase(product.name) +'-grid.png'" :alt="product.name">
 
@@ -125,6 +125,18 @@
                 grandTotal: 0.00,
             }
         },
+        computed: {
+            sortedArray: function() {
+                var $this = this;
+              function compare(a, b) {
+                if (a.name == $this.$parent.slowProduct.name)
+                  return -1;
+                return 1;
+              }
+
+              return this.products.sort(compare);
+            }
+        },
         methods: {
             toLowerCase(string) {
                 return string.toLowerCase();
@@ -175,6 +187,7 @@
                 // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
                 localStorage.setItem('cart', JSON.stringify(this.cart));
                 localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+                localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct));
                 // MODIFY THIS LATER
                 localStorage.setItem('user', JSON.stringify({'csrf': this.$parent.csrf, 'email': 'something@email.com'}));
 

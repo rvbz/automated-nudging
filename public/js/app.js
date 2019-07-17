@@ -1839,7 +1839,10 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_integer_plusminus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-integer-plusminus */ "./node_modules/vue-integer-plusminus/src/main.js");
-//
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -1914,17 +1917,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    IntegerPlusminus: vue_integer_plusminus__WEBPACK_IMPORTED_MODULE_0__["IntegerPlusminus"]
+    IntegerPlusminus: vue_integer_plusminus__WEBPACK_IMPORTED_MODULE_0__["IntegerPlusminus"],
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   mounted: function mounted() {
     $(this.$el).foundation();
+
+    if (localStorage.getItem('cart')) {
+      this.cart = JSON.parse(localStorage.getItem('cart'));
+      this.getGrandTotal();
+    }
+
+    if (localStorage.getItem('nudge')) {
+      this.nudge = JSON.parse(localStorage.getItem('nudge'));
+    }
+
+    if (localStorage.getItem('slow_moving_product')) {
+      this.slowProduct = JSON.parse(localStorage.getItem('slow_moving_product'));
+    }
+
+    this.isLoading = false;
   },
   data: function data() {
     return {
       cart: [],
-      grandTotal: 0.00
+      nudge: [],
+      grandTotal: 0.00,
+      isLoading: true,
+      slowProduct: []
     };
   },
   methods: {
@@ -1964,12 +1988,29 @@ __webpack_require__.r(__webpack_exports__);
 
       this.getGrandTotal();
     },
+    checkForCheckoutNudge: function checkForCheckoutNudge() {
+      var _this = this;
+
+      var validator = false;
+      var productIndex = this.cart.findIndex(function (x) {
+        return x.product === _this.slowProduct.name;
+      });
+
+      if (this.nudge.id == 2 && productIndex < 0) {
+        validator = true;
+      }
+
+      return validator;
+    },
     getGrandTotal: function getGrandTotal() {
       var total = 0.00;
       this.cart.forEach(function (element) {
         total += element.qty * element.unit_price;
       });
       this.grandTotal = total.toFixed(2);
+    },
+    getSubTotal: function getSubTotal(product) {
+      return (product.qty * product.unit_price).toFixed(2);
     }
   }
 });
@@ -2091,12 +2132,6 @@ __webpack_require__.r(__webpack_exports__);
       $this.$parent.isLoading = false;
     });
   },
-  props: {
-    slowProduct: {
-      type: Object,
-      required: true
-    }
-  },
   data: function data() {
     return {
       products: [],
@@ -2148,7 +2183,20 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.grandTotal = total.toFixed(2);
     },
-    checkout: function checkout() {// SEND TO CHECKOUT PAGE
+    checkout: function checkout() {
+      // Show loading icon to avoid double clicking
+      this.$parent.isLoading = true; // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
+
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+      localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+      localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct)); // MODIFY THIS LATER
+
+      localStorage.setItem('user', JSON.stringify({
+        'csrf': this.$parent.csrf,
+        'email': 'something@email.com'
+      })); // SEND TO CHECKOUT PAGE
+
+      window.location.href = "/checkout";
     }
   }
 });
@@ -2332,12 +2380,6 @@ __webpack_require__.r(__webpack_exports__);
       $this.$parent.isLoading = false;
     });
   },
-  props: {
-    slowProduct: {
-      type: Object,
-      required: true
-    }
-  },
   data: function data() {
     return {
       products: [],
@@ -2365,7 +2407,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
       if (discount > 0) {
-        productPrice = productPrice - productPrice * discount / 100;
+        productPrice = (productPrice - productPrice * discount / 100).toFixed(2);
       } // Check if the product comes with a Qty, if not, most likely comes from a nudge so, it will be automatically 1
 
 
@@ -2395,15 +2437,34 @@ __webpack_require__.r(__webpack_exports__);
       // check if the slow-moving product hasnt been already added to the cart
       // if not offer the nudge
       var productIndex = this.cart.findIndex(function (x) {
-        return x.product === _this.slowProduct.name;
+        return x.product === _this.$parent.slowProduct.name;
       });
 
-      if (productIndex >= 0) {// product exists already in the cart, nothing to do, proceed to checkout
+      if (productIndex >= 0) {
+        // product exists already in the cart, nothing to do, proceed to checkout
         // SEND TO CHECKOUT PAGE
+        this.goToCheckout();
       } else {
         // product not in cart list, present nudge
         $("#product-discount").foundation('open');
       }
+    },
+    goToCheckout: function goToCheckout() {
+      // Show loading icon to avoid double clicking
+      this.$parent.isLoading = true; // Close any modal is open
+
+      $("#product-discount").foundation('close'); // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
+
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+      localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+      localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct)); // MODIFY THIS LATER
+
+      localStorage.setItem('user', JSON.stringify({
+        'csrf': this.$parent.csrf,
+        'email': 'something@email.com'
+      })); // SEND TO CHECKOUT PAGE
+
+      window.location.href = "/checkout";
     }
   }
 });
@@ -2544,6 +2605,18 @@ Vue.use(vue_masonry__WEBPACK_IMPORTED_MODULE_2__["VueMasonryPlugin"]);
       grandTotal: 0.00
     };
   },
+  computed: {
+    sortedArray: function sortedArray() {
+      var $this = this;
+
+      function compare(a, b) {
+        if (a.name == $this.$parent.slowProduct.name) return -1;
+        return 1;
+      }
+
+      return this.products.sort(compare);
+    }
+  },
   methods: {
     toLowerCase: function toLowerCase(string) {
       return string.toLowerCase();
@@ -2593,7 +2666,8 @@ Vue.use(vue_masonry__WEBPACK_IMPORTED_MODULE_2__["VueMasonryPlugin"]);
       this.$parent.isLoading = true; // Store the cart, nudge and session on LocalStorage to retrieve it on the checkout page
 
       localStorage.setItem('cart', JSON.stringify(this.cart));
-      localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge)); // MODIFY THIS LATER
+      localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
+      localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct)); // MODIFY THIS LATER
 
       localStorage.setItem('user', JSON.stringify({
         'csrf': this.$parent.csrf,
@@ -2642,6 +2716,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2656,24 +2731,24 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
   },
   mounted: function mounted() {
     // Get all products
-    var $this = this;
-    axios.get('api/nudges/getanudge').then(function (res) {
-      // $this.nudge = res.data;
-      $this.nudge = {
-        "id": 1,
-        "name": "Visual products"
-      };
+    var $this = this; //get the slow-moving product
+
+    axios.get('api/products/getslowmoving').then(function (response) {
+      $this.slowProduct = response.data;
+      axios.get('api/nudges/getanudge').then(function (res) {
+        // $this.nudge = res.data;
+        $this.nudge = {
+          "id": 3,
+          "name": "Discount"
+        };
+      });
     });
   },
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       nudge: [],
-      slowProduct: {
-        "id": 5,
-        "name": "Candies",
-        "price": "4.00"
-      },
+      slowProduct: {},
       isLoading: true
     };
   },
@@ -49027,187 +49102,228 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "grid-container checkout" },
+    [
+      _c("loading", {
+        attrs: {
+          active: _vm.isLoading,
+          color: "#359bd4",
+          height: 80,
+          width: 80,
+          opacity: 0.7
+        },
+        on: {
+          "update:active": function($event) {
+            _vm.isLoading = $event
+          }
+        }
+      }),
+      _vm._v("\n\n" + _vm._s(_vm.cart) + "\n        "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("table", { staticClass: "unstriped" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.cart, function(product) {
+            return _c("tr", [
+              _c("td", [
+                _c("img", {
+                  attrs: {
+                    src:
+                      "/images/products/" +
+                      _vm.toLowerCase(product.product) +
+                      "/" +
+                      _vm.toLowerCase(product.product) +
+                      "-grid.png",
+                    alt: product.product
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("td", [_c("strong", [_vm._v(_vm._s(product.product))])]),
+              _vm._v(" "),
+              _c("td", { staticClass: "text-center" }, [
+                _c("strong", [_vm._v("€" + _vm._s(product.unit_price))])
+              ]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c(
+                    "integer-plusminus",
+                    {
+                      attrs: { min: 1 },
+                      on: {
+                        input: function($event) {
+                          return _vm.getGrandTotal()
+                        }
+                      },
+                      model: {
+                        value: product.qty,
+                        callback: function($$v) {
+                          _vm.$set(product, "qty", $$v)
+                        },
+                        expression: "product.qty"
+                      }
+                    },
+                    [
+                      _c("template", { slot: "decrement" }, [
+                        _c("i", {
+                          staticClass: "fas fa-minus",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("template", { slot: "increment" }, [
+                        _c("i", {
+                          staticClass: "fas fa-plus",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ])
+                    ],
+                    2
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", { staticClass: "text-center" }, [
+                _c("strong", [_vm._v("€" + _vm._s(_vm.getSubTotal(product)))])
+              ])
+            ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _vm.checkForCheckoutNudge()
+        ? _c("table", { staticClass: "unstriped auto-addition-checkout" }, [
+            _vm._m(2)
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid-x grid-padding-x review-checkout" }, [
+        _c("div", { staticClass: "cell text-right" }, [
+          _c("h4", [
+            _c("strong", [_vm._v("Grand Total:")]),
+            _vm._v(" €" + _vm._s(_vm.grandTotal))
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(3)
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid-container checkout" }, [
-      _c("div", { staticClass: "grid-x grid-padding-x" }, [
-        _c("div", { staticClass: "cell" }, [
-          _c("h3", [_c("strong", [_vm._v("You will enjoy your movie with:")])])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("table", { staticClass: "unstriped" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", { attrs: { width: "150" } }),
-            _vm._v(" "),
-            _c("th", [_vm._v("Snack")]),
-            _vm._v(" "),
-            _c("th", { staticClass: "text-center", attrs: { width: "150" } }, [
-              _vm._v("Unit price")
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "text-center", attrs: { width: "150" } }, [
-              _vm._v("Qty")
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "text-center", attrs: { width: "150" } }, [
-              _vm._v("Subtotal")
-            ])
-          ])
+    return _c("div", { staticClass: "grid-x grid-padding-x" }, [
+      _c("div", { staticClass: "cell" }, [
+        _c("h3", [_c("strong", [_vm._v("You will enjoy your movie with:")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { width: "150" } }),
+        _vm._v(" "),
+        _c("th", [_vm._v("Snack")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center", attrs: { width: "150" } }, [
+          _vm._v("Unit price")
         ]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [
-              _c("img", {
-                attrs: {
-                  src:
-                    "https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=img+placeholder"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("td", [_c("strong", [_vm._v("Popcorn")])]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center" }, [
-              _c("strong", [_vm._v("€30.00")])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center" }, [
-              _c(
-                "div",
-                { staticClass: "input-group plus-minus-input align-center" },
-                [
-                  _c("div", { staticClass: "input-group-button" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "button circle",
-                        attrs: {
-                          type: "button",
-                          "data-quantity": "minus",
-                          "data-field": "quantity"
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fas fa-minus",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "input-group-field",
-                    attrs: { type: "number", name: "quantity", value: "1" }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-button" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "button circle",
-                        attrs: {
-                          type: "button",
-                          "data-quantity": "plus",
-                          "data-field": "quantity"
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fas fa-plus",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center" }, [
-              _c("strong", [_vm._v("€30.00")])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("table", { staticClass: "unstriped auto-addition-checkout" }, [
-        _c("tbody", [
-          _c("tr", [
-            _c("td", { attrs: { width: "150" } }, [
-              _c("div", { staticClass: "switch large" }, [
-                _c("input", {
-                  staticClass: "switch-input",
-                  attrs: {
-                    id: "yes-no",
-                    type: "checkbox",
-                    checked: "checked",
-                    name: "exampleSwitch"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "switch-paddle", attrs: { for: "yes-no" } },
-                  [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "switch-active",
-                        attrs: { "aria-hidden": "true" }
-                      },
-                      [_vm._v("Yes")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "switch-inactive",
-                        attrs: { "aria-hidden": "true" }
-                      },
-                      [_vm._v("No")]
-                    )
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "cheese-text nachos" }, [
-              _c("strong", [
-                _vm._v("Why not adding some "),
-                _c("span", [_vm._v("Nachos")]),
-                _vm._v(" ?")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-center", attrs: { width: "150" } }, [
-              _c("strong", [_vm._v("€30.00")])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "grid-x grid-padding-x review-checkout" }, [
-        _c("div", { staticClass: "cell text-right" }, [
-          _c("h4", [_c("strong", [_vm._v("Grand Total:")]), _vm._v(" €90.00")])
+        _c("th", { staticClass: "text-center", attrs: { width: "150" } }, [
+          _vm._v("Qty")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "cell text-right finish-button" }, [
-          _c(
-            "a",
-            { staticClass: "button round-icon large", attrs: { href: "#" } },
-            [_vm._v("Finish")]
-          )
+        _c("th", { staticClass: "text-center", attrs: { width: "150" } }, [
+          _vm._v("Subtotal")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tbody", [
+      _c("tr", [
+        _c("td", { attrs: { width: "150" } }, [
+          _c("div", { staticClass: "switch large" }, [
+            _c("input", {
+              staticClass: "switch-input",
+              attrs: {
+                id: "yes-no",
+                type: "checkbox",
+                checked: "checked",
+                name: "exampleSwitch"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "switch-paddle", attrs: { for: "yes-no" } },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "switch-active",
+                    attrs: { "aria-hidden": "true" }
+                  },
+                  [_vm._v("Yes")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "switch-inactive",
+                    attrs: { "aria-hidden": "true" }
+                  },
+                  [_vm._v("No")]
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "cheese-text nachos" }, [
+          _c("strong", [
+            _vm._v("Why not adding some "),
+            _c("span", [_vm._v("Nachos")]),
+            _vm._v(" ?")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "text-center", attrs: { width: "150" } }, [
+          _c("strong", [_vm._v("€30.00")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cell text-right finish-button" }, [
+      _c(
+        "a",
+        { staticClass: "button round-icon large", attrs: { href: "#" } },
+        [_vm._v("Finish")]
+      )
     ])
   }
 ]
@@ -49682,7 +49798,7 @@ var render = function() {
           _c("div", {
             class:
               "cell medium-6 image-background " +
-              _vm.toLowerCase(_vm.slowProduct.name)
+              _vm.toLowerCase(_vm.$parent.slowProduct.name)
           }),
           _vm._v(" "),
           _c("div", { staticClass: "cell medium-6 content-wrap" }, [
@@ -49691,7 +49807,7 @@ var render = function() {
             _c("p", { staticClass: "text-center" }, [
               _vm._v(
                 "You can add some " +
-                  _vm._s(_vm.slowProduct.name) +
+                  _vm._s(_vm.$parent.slowProduct.name) +
                   " to your cart with:"
               )
             ]),
@@ -49712,6 +49828,7 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
+                        return _vm.goToCheckout()
                       }
                     }
                   },
@@ -49729,7 +49846,8 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        return _vm.addToCart(_vm.slowProduct, 10)
+                        _vm.addToCart(_vm.$parent.slowProduct, 10) +
+                          _vm.goToCheckout()
                       }
                     }
                   },
@@ -49870,10 +49988,7 @@ var render = function() {
       [
         _c("div", { staticClass: "item-sizer" }),
         _vm._v(" "),
-        _vm._l(_vm.sortArrays(_vm.products, "slow_moving", "desc"), function(
-          product,
-          index
-        ) {
+        _vm._l(_vm.sortedArray, function(product, index) {
           return _c(
             "div",
             {
@@ -49881,13 +49996,13 @@ var render = function() {
               staticClass: "cell product",
               class: {
                 "item--width2":
-                  product.slow_moving == 1 &&
+                  product.name == _vm.$parent.slowProduct.name &&
                   product.visual_nudge_mode == "Landscape"
               }
             },
             [
               _c("div", { staticClass: "product-inside" }, [
-                product.slow_moving == 1
+                product.name == _vm.$parent.slowProduct.name
                   ? _c("img", {
                       attrs: {
                         src:
@@ -50080,12 +50195,20 @@ var render = function() {
           }
         }
       }),
-      _vm._v("\n    \n    " + _vm._s(_vm.nudge) + "\n\n    "),
+      _vm._v(
+        "\n    \n    " +
+          _vm._s(_vm.nudge) +
+          "\n    " +
+          _vm._s(_vm.slowProduct) +
+          "\n\n    "
+      ),
       _vm.nudge.id == 3
-        ? _c("modal-nudge", { attrs: { slowProduct: _vm.slowProduct } })
+        ? _c("modal-nudge")
         : _vm.nudge.id == 2
-        ? _c("checkout-nudge", { attrs: { slowProduct: _vm.slowProduct } })
-        : _c("visual-nudge")
+        ? _c("checkout-nudge")
+        : _vm.nudge.id == 1
+        ? _c("visual-nudge")
+        : _vm._e()
     ],
     1
   )

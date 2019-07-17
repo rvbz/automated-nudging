@@ -1,5 +1,8 @@
 <template>
 	<div class="grid-container checkout">
+		<loading :active.sync="isLoading" :color="'#359bd4'" :height="80" :width="80" :opacity="0.7"></loading>
+
+{{cart}}
         <div class="grid-x grid-padding-x">
             <div class="cell">
                 <h3><strong>You will enjoy your movie with:</strong></h3>
@@ -17,32 +20,28 @@
 			    </tr>
 			</thead>
 			<tbody>
-			    <tr>
-			      <td><img src="https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=img+placeholder"></td>
-			      <td><strong>Popcorn</strong></td>
-			      <td class="text-center"><strong>€30.00</strong></td>
+			    <tr v-for="product in cart">
+			      <td><img :src="'/images/products/'+ toLowerCase(product.product) +'/'+ toLowerCase(product.product) +'-grid.png'" :alt="product.product"></td>
+			      <td><strong>{{ product.product }}</strong></td>
+			      <td class="text-center"><strong>€{{ product.unit_price }}</strong></td>
 			      <td class="text-center">
-			      	<div class="input-group plus-minus-input align-center">
-                        <div class="input-group-button">
-                            <button type="button" class="button circle" data-quantity="minus" data-field="quantity">
-                              <i class="fas fa-minus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                        <input class="input-group-field" type="number" name="quantity" value="1">
-                        <div class="input-group-button">
-                            <button type="button" class="button circle" data-quantity="plus" data-field="quantity">
-                              <i class="fas fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
+			      	<integer-plusminus :min="1" v-model="product.qty" v-on:input="getGrandTotal()">
+                        <template slot="decrement">
+                            <i class="fas fa-minus" aria-hidden="true"></i>
+                        </template>
+
+                        <template slot="increment">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        </template>
+                    </integer-plusminus>
 			      </td>
-			      <td class="text-center"><strong>€30.00</strong></td>
+			      <td class="text-center"><strong>€{{ getSubTotal(product) }}</strong></td>
 			    </tr>
 			</tbody>
 		</table>
 
 
-		<table class="unstriped auto-addition-checkout">
+		<table class="unstriped auto-addition-checkout" v-if="checkForCheckoutNudge()">
 			<tbody>
 			    <tr>
 			      <td width="150">
@@ -63,7 +62,7 @@
 
 		<div class="grid-x grid-padding-x review-checkout">
             <div class="cell text-right">
-                <h4><strong>Grand Total:</strong> €90.00</h4>
+                <h4><strong>Grand Total:</strong> €{{ grandTotal }}</h4>
             </div>
             <div class="cell text-right finish-button">
                 <a href="#" class="button round-icon large">Finish</a>
@@ -74,20 +73,41 @@
 
 <script>
     import { IntegerPlusminus } from 'vue-integer-plusminus';
+    import Loading from 'vue-loading-overlay';
+
+    import 'vue-loading-overlay/dist/vue-loading.css';
 
     export default {
         components: { 
             IntegerPlusminus,
+            Loading 
         },
 
         mounted() {
             $(this.$el).foundation();
 
+            if (localStorage.getItem('cart')) {
+            	this.cart = JSON.parse(localStorage.getItem('cart'));
+            	this.getGrandTotal();
+            }
+
+            if (localStorage.getItem('nudge')) {
+            	this.nudge = JSON.parse(localStorage.getItem('nudge'));
+            }
+
+            if (localStorage.getItem('slow_moving_product')) {
+            	this.slowProduct = JSON.parse(localStorage.getItem('slow_moving_product'));
+            }
+
+            this.isLoading = false;
         },
         data() {
             return {
                 cart: [],
+                nudge: [],
                 grandTotal: 0.00,
+                isLoading: true,
+                slowProduct: []
             }
         },
         methods: {
@@ -123,6 +143,16 @@
                 this.getGrandTotal();
             },
 
+            checkForCheckoutNudge() {
+            	var validator = false;
+            	var productIndex = this.cart.findIndex(x => x.product === this.slowProduct.name);
+
+            	if (this.nudge.id == 2 && productIndex < 0) {
+            		validator = true;
+            	}
+            	return validator;
+            },
+
             getGrandTotal() {
                 var total = 0.00;
 
@@ -132,7 +162,9 @@
 
                 this.grandTotal = total.toFixed(2);
             },
-
+            getSubTotal(product) {
+            	return (product.qty * product.unit_price).toFixed(2);
+            }
 
 
         },
