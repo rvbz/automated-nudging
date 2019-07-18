@@ -1943,6 +1943,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -1967,6 +1969,10 @@ __webpack_require__.r(__webpack_exports__);
       this.slowProduct = JSON.parse(localStorage.getItem('slow_moving_product'));
     }
 
+    if (localStorage.getItem('user')) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+    }
+
     this.lookForChecked();
     this.isLoading = false;
   },
@@ -1974,6 +1980,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       cart: [],
       nudge: [],
+      user: [],
       grandTotal: 0.00,
       isLoading: true,
       slowProduct: [],
@@ -2011,6 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
       this.cart.push({
+        'id': product.id,
         'product': product.name,
         'qty': product.qty,
         'unit_price': productPrice
@@ -2069,6 +2077,79 @@ __webpack_require__.r(__webpack_exports__);
     },
     getSubTotal: function getSubTotal(product) {
       return (product.qty * product.unit_price).toFixed(2);
+    },
+    submit: function submit() {
+      // Save all information in a DB
+      this.isLoading = true; // First we need to save the user on the DB
+      // get the data to create new user
+
+      var params = {
+        email: this.user.email
+      };
+      var $this = this;
+      axios.post('/users', params).then(function (response) {
+        console.log(response);
+
+        if (response.statusText == "Created") {
+          // Store the user ID as we will used it later
+          var user_created = response.data; // Now lets store the user fill data
+          // get the data to create new fill
+
+          var params2 = {
+            user_id: user_created.id,
+            nudge_id: $this.nudge.id,
+            slow_moving_product_id: $this.slowProduct.id
+          };
+          axios.post('/users/fills', params2).then(function (response2) {
+            console.log(response2);
+
+            if (response2.statusText == "Created") {
+              // Store the user ID as we will used it later
+              var user_fill_created = response2.data; // Now lets proceed to store the user's cart
+              // send the complete array to te backend and then proceess it there
+              // get the data to create new sell
+
+              var params3 = {
+                cart: $this.cart,
+                user_fill_id: user_fill_created.id,
+                slow_moving_product_id: $this.slowProduct.id
+              };
+              axios.post('/users/sells', params3).then(function (response3) {
+                console.log(response3);
+
+                if (response3.data == "All saved") {
+                  // CREATE A FINISH STAGE
+                  alert('You have finish thank you'); // SEND TO Thanks PAGE
+
+                  window.location.href = "/thanks";
+                }
+              });
+            }
+          }, function (error2) {
+            console.log(error);
+
+            for (var i = 0; i < error2.data.errors.length; i++) {
+              alert(error2.data.errors[i]);
+            }
+
+            $this.isLoading = false;
+          });
+        } else {
+          for (var i = 0; i < response.data.errors.length; i++) {
+            alert(response.data.errors[i]);
+          }
+
+          $this.isLoading = false;
+        }
+      }, function (error) {
+        console.log(error);
+
+        for (var i = 0; i < error.data.errors.length; i++) {
+          alert(response.data.errors[i]);
+        }
+
+        $this.isLoading = false;
+      });
     }
   }
 });
@@ -2227,6 +2308,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
       this.cart.push({
+        'id': product.id,
         'product': product.name,
         'qty': product.qty,
         'unit_price': productPrice
@@ -2475,6 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
       this.cart.push({
+        'id': product.id,
         'product': product.name,
         'qty': product.qty,
         'unit_price': productPrice
@@ -2705,6 +2788,7 @@ Vue.use(vue_masonry__WEBPACK_IMPORTED_MODULE_2__["VueMasonryPlugin"]);
 
 
       this.cart.push({
+        'id': product.id,
         'product': product.name,
         'qty': product.qty,
         'unit_price': productPrice
@@ -49174,7 +49258,15 @@ var render = function() {
           }
         }
       }),
-      _vm._v("\n\n" + _vm._s(_vm.cart) + "\n\n\t\t"),
+      _vm._v(
+        "\n\n" +
+          _vm._s(_vm.cart) +
+          "\n" +
+          _vm._s(_vm.nudge) +
+          "\n" +
+          _vm._s(_vm.slowProduct) +
+          "\n\n\t\t"
+      ),
       Object.keys(_vm.cart).length !== 0
         ? [
             _vm._m(0),
@@ -49355,7 +49447,22 @@ var render = function() {
         _vm._v(" "),
         _vm._m(4),
         _vm._v(" "),
-        _vm._m(5)
+        _c("div", { staticClass: "cell small-6 text-right finish-button" }, [
+          _c(
+            "a",
+            {
+              staticClass: "button round-icon large",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit()
+                }
+              }
+            },
+            [_vm._v("Finish")]
+          )
+        ])
       ])
     ],
     2
@@ -49458,18 +49565,6 @@ var staticRenderFns = [
       _c("a", { staticClass: "button clear large", attrs: { href: "/" } }, [
         _vm._v("Back")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cell small-6 text-right finish-button" }, [
-      _c(
-        "a",
-        { staticClass: "button round-icon large", attrs: { href: "#" } },
-        [_vm._v("Finish")]
-      )
     ])
   }
 ]

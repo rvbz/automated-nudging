@@ -3,6 +3,8 @@
 		<loading :active.sync="isLoading" :color="'#359bd4'" :height="80" :width="80" :opacity="0.7"></loading>
 
 {{cart}}
+{{nudge}}
+{{slowProduct}}
 
 		<template v-if="Object.keys(cart).length !== 0">
 
@@ -92,7 +94,7 @@
                 <a href="/" class="button clear large">Back</a>
             </div>
             <div class="cell small-6 text-right finish-button">
-                <a href="#" class="button round-icon large">Finish</a>
+                <a href="#" @click.prevent="submit()" class="button round-icon large">Finish</a>
             </div>
         </div>
     </div>
@@ -126,6 +128,10 @@
             	this.slowProduct = JSON.parse(localStorage.getItem('slow_moving_product'));
             }
 
+            if (localStorage.getItem('user')) {
+                this.user = JSON.parse(localStorage.getItem('user'));
+            }
+
             this.lookForChecked();
 
             this.isLoading = false;
@@ -134,6 +140,7 @@
             return {
                 cart: [],
                 nudge: [],
+                user: [],
                 grandTotal: 0.00,
                 isLoading: true,
                 slowProduct: [],
@@ -168,7 +175,7 @@
                 }
 
                 // add the product to cart array
-                this.cart.push({'product': product.name, 'qty': product.qty, 'unit_price': productPrice});
+                this.cart.push({'id': product.id, 'product': product.name, 'qty': product.qty, 'unit_price': productPrice});
 
                 // Now get total price
                 this.getGrandTotal();
@@ -226,6 +233,86 @@
             },
             getSubTotal(product) {
             	return (product.qty * product.unit_price).toFixed(2);
+            },
+
+            submit() {
+                // Save all information in a DB
+                this.isLoading = true;
+
+                // First we need to save the user on the DB
+                // get the data to create new user
+                const params = {
+                    email: this.user.email
+                }
+
+                var $this = this;
+                axios.post('/users', params).then(function(response){
+                    console.log(response);
+                    if (response.statusText == "Created") {
+                        // Store the user ID as we will used it later
+                        var user_created = response.data
+
+                        // Now lets store the user fill data
+                        // get the data to create new fill
+                        const params2 = {
+                            user_id: user_created.id,
+                            nudge_id: $this.nudge.id,
+                            slow_moving_product_id: $this.slowProduct.id
+                        }
+
+                        axios.post('/users/fills', params2).then(function(response2){
+                            console.log(response2);
+                            if (response2.statusText == "Created") {
+                                // Store the user ID as we will used it later
+                                var user_fill_created = response2.data
+
+                                // Now lets proceed to store the user's cart
+                                // send the complete array to te backend and then proceess it there
+                                // get the data to create new sell
+                                const params3 = {
+                                    cart: $this.cart,
+                                    user_fill_id: user_fill_created.id,
+                                    slow_moving_product_id: $this.slowProduct.id
+                                }
+
+                                axios.post('/users/sells', params3).then(function(response3){
+                                    console.log(response3);
+                                    if (response3.data == "All saved") {
+
+                                        // CREATE A FINISH STAGE
+                                        alert('You have finish thank you');
+
+                                        // SEND TO Thanks PAGE
+                                        window.location.href = "/thanks";
+                                    }
+                                });
+                            }
+                        }, function(error2){
+                            console.log(error);
+                            for (var i = 0; i < error2.data.errors.length; i++) {
+                                alert(error2.data.errors[i]);
+                            }
+
+                            $this.isLoading = false;
+                        });
+                    } else {
+                        for (var i = 0; i < response.data.errors.length; i++) {
+                            alert(response.data.errors[i]);
+                        }
+
+                        $this.isLoading = false;
+                    }
+
+                }, function(error){
+                    console.log(error);
+                    for (var i = 0; i < error.data.errors.length; i++) {
+                        alert(response.data.errors[i]);
+                    }
+
+                    $this.isLoading = false;
+                });
+
+
             }
 
 

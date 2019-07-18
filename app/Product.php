@@ -14,31 +14,20 @@ class Product extends Model
     /**
      * Get the sells for the product.
      */
-    public function comments()
+    public function sells()
     {
         return $this->hasMany('App\Sell');
     }
 
 
-
-    // Add a new attribute
-    protected $appends = ['slow_moving'];
-
     /**
-	 * Get the slow moving attribute of a product.
-	 *
-	 * @return boolean
-	 */
-	public function getSlowMovingAttribute()
-	{
-	    if ($this->name == "Nachos") {
-	    	return true;
-	    } elseif ($this->name == "Candies"){
-	    	return true;
-	    } else {
-	    	return false;
-	    }
-	}
+     * Get the filled record associated with the product as slow moving product.
+     */
+    public function user_fill()
+    {
+        return $this->hasOne('App\User_fill', 'slow_moving_product_id');
+    }
+ 
 
 
 }

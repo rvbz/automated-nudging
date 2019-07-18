@@ -164,7 +164,7 @@
                 }
 
                 // add the product to cart array
-                this.cart.push({'product': product.name, 'qty': product.qty, 'unit_price': productPrice});
+                this.cart.push({'id': product.id, 'product': product.name, 'qty': product.qty, 'unit_price': productPrice});
 
                 // Now get total price
                 this.getGrandTotal();

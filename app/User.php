@@ -16,24 +16,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * Get the sells for the user.
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function sells()
+    {
+        return $this->hasMany('App\Sell');
+    }
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * Get the filled record associated with the user.
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function user_fill()
+    {
+        return $this->hasOne('App\User_fill');
+    }
 }
