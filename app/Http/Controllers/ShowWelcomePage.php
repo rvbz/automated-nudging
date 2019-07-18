@@ -19,9 +19,9 @@ class ShowWelcomePage extends Controller
     public function __invoke(Request $request)
     {
 
-        $products = Product::all();
+        $email = urldecode(request()->email);
 
-        return view('welcome', ['products' => $products]);
+        return view('welcome', ['email' => $email]);
     }
 
     public function getAllProducts() {

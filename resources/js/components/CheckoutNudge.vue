@@ -167,7 +167,7 @@
                 localStorage.setItem('nudge', JSON.stringify(this.$parent.nudge));
                 localStorage.setItem('slow_moving_product', JSON.stringify(this.$parent.slowProduct));
                 // MODIFY THIS LATER
-                localStorage.setItem('user', JSON.stringify({'csrf': this.$parent.csrf, 'email': 'something@email.com'}));
+                localStorage.setItem('user', JSON.stringify({'csrf': this.$parent.csrf, 'email': this.$parent.email}));
 
 
                 // SEND TO CHECKOUT PAGE

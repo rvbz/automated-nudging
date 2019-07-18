@@ -2333,7 +2333,7 @@ __webpack_require__.r(__webpack_exports__);
 
       localStorage.setItem('user', JSON.stringify({
         'csrf': this.$parent.csrf,
-        'email': 'something@email.com'
+        'email': this.$parent.email
       })); // SEND TO CHECKOUT PAGE
 
       window.location.href = "/checkout";
@@ -2602,7 +2602,7 @@ __webpack_require__.r(__webpack_exports__);
 
       localStorage.setItem('user', JSON.stringify({
         'csrf': this.$parent.csrf,
-        'email': 'something@email.com'
+        'email': this.$parent.email
       })); // SEND TO CHECKOUT PAGE
 
       window.location.href = "/checkout";
@@ -2813,7 +2813,7 @@ Vue.use(vue_masonry__WEBPACK_IMPORTED_MODULE_2__["VueMasonryPlugin"]);
 
       localStorage.setItem('user', JSON.stringify({
         'csrf': this.$parent.csrf,
-        'email': 'something@email.com'
+        'email': this.$parent.email
       })); // SEND TO CHECKOUT PAGE
 
       window.location.href = "/checkout";
@@ -2859,6 +2859,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2881,6 +2882,12 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
         $this.nudge = res.data; // $this.nudge = { "id": 2, "name": "At checkout" };
       });
     });
+  },
+  props: {
+    email: {
+      type: String,
+      required: true
+    }
   },
   data: function data() {
     return {
@@ -50442,6 +50449,8 @@ var render = function() {
           _vm._s(_vm.nudge) +
           "\n    " +
           _vm._s(_vm.slowProduct) +
+          "\n    " +
+          _vm._s(_vm.email) +
           "\n\n    "
       ),
       _vm.nudge.id == 3

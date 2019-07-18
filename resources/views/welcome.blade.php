@@ -1,9 +1,9 @@
 @extends('layouts.default')
 
 @section('content')
-    
+    	
 
-        <welcome-component></welcome-component>
+        <welcome-component :email="'{{$email}}'"></welcome-component>
     
         
 

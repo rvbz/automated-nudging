@@ -6,6 +6,7 @@
             
             {{ nudge }}
             {{ slowProduct }}
+            {{email}}
     
             <modal-nudge v-if="nudge.id == 3"></modal-nudge>
 
@@ -50,6 +51,12 @@
                     
                 });
             });
+        },
+        props: {
+          email: {
+                type: String,
+                required: true
+            },
         },
         data() {
             return {
