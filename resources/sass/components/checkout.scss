@@ -98,5 +98,9 @@
 
 		padding: rem-calc(15);
 		font-size: rem-calc(90);
+
+		i {
+			transform: rotate(-45deg);
+		}
 	}
 }

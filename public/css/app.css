@@ -14138,6 +14138,10 @@ html.is-reveal-open body {
   padding: 0.8333333333rem;
   font-size: 5rem;
 }
+.callout .icon-wrapper i {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
 
 #product-discount {
   padding: 0;
@@ -14158,6 +14162,34 @@ html.is-reveal-open body {
 }
 #product-discount .image-background.candies {
   background: url("../images/products/candies/candies-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.popcorn {
+  background: url("../images/products/popcorn/popcorn-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.hotdog {
+  background: url("../images/products/hotdog/hotdog-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.nachos {
+  background: url("../images/products/nachos/nachos-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.icecream {
+  background: url("../images/products/icecream/icecream-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.soda {
+  background: url("../images/products/soda/soda-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.icedrink {
+  background: url("../images/products/icedrink/icedrink-modal.jpg") center center;
+  background-size: cover;
+}
+#product-discount .image-background.water {
+  background: url("../images/products/water/water-modal.jpg") center center;
   background-size: cover;
 }
 

@@ -1943,8 +1943,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -1969,6 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
       this.slowProduct = JSON.parse(localStorage.getItem('slow_moving_product'));
     }
 
+    this.lookForChecked();
     this.isLoading = false;
   },
   data: function data() {
@@ -1977,7 +1976,9 @@ __webpack_require__.r(__webpack_exports__);
       nudge: [],
       grandTotal: 0.00,
       isLoading: true,
-      slowProduct: []
+      slowProduct: [],
+      checkedNudge: false,
+      showCheckedNudge: false
     };
   },
   methods: {
@@ -2017,6 +2018,20 @@ __webpack_require__.r(__webpack_exports__);
 
       this.getGrandTotal();
     },
+    removeFromCart: function removeFromCart(productName) {
+      // First check if the array contains already the product
+      var productIndex = this.cart.findIndex(function (x) {
+        return x.product === productName;
+      });
+
+      if (productIndex >= 0) {
+        // product exists in the cart, delete it
+        this.cart.splice(productIndex, 1);
+      } // Now get total price
+
+
+      this.getGrandTotal();
+    },
     checkForCheckoutNudge: function checkForCheckoutNudge() {
       var _this = this;
 
@@ -2030,6 +2045,20 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return validator;
+    },
+    lookForChecked: function lookForChecked() {
+      if (this.checkForCheckoutNudge()) {
+        this.checkedNudge = true;
+        this.showCheckedNudge = true;
+        this.addToCart(this.slowProduct);
+      }
+    },
+    filterlowProduct: function filterlowProduct() {
+      if (this.checkedNudge) {
+        this.addToCart(this.slowProduct);
+      } else {
+        this.removeFromCart(this.slowProduct.name);
+      }
     },
     getGrandTotal: function getGrandTotal() {
       var total = 0.00;
@@ -2765,7 +2794,7 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
     axios.get('api/products/getslowmoving').then(function (response) {
       $this.slowProduct = response.data;
       axios.get('api/nudges/getanudge').then(function (res) {
-        $this.nudge = res.data; // $this.nudge = { "id": 3, "name": "Discount" };
+        $this.nudge = res.data; // $this.nudge = { "id": 2, "name": "At checkout" };
       });
     });
   },
@@ -49228,17 +49257,86 @@ var render = function() {
                 }),
                 0
               )
-            ]),
-            _vm._v(" "),
-            _vm.checkForCheckoutNudge()
-              ? _c(
-                  "table",
-                  { staticClass: "unstriped auto-addition-checkout" },
-                  [_vm._m(2)]
-                )
-              : _vm._e()
+            ])
           ]
-        : [_vm._m(3)],
+        : [_vm._m(2)],
+      _vm._v(" "),
+      _vm.showCheckedNudge
+        ? _c("table", { staticClass: "unstriped auto-addition-checkout" }, [
+            _c("tbody", [
+              _c("tr", [
+                _c("td", { attrs: { width: "150" } }, [
+                  _c("div", { staticClass: "switch large" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.checkedNudge,
+                          expression: "checkedNudge"
+                        }
+                      ],
+                      staticClass: "switch-input",
+                      attrs: {
+                        id: "yes-no",
+                        type: "checkbox",
+                        name: "exampleSwitch"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.checkedNudge)
+                          ? _vm._i(_vm.checkedNudge, null) > -1
+                          : _vm.checkedNudge
+                      },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$a = _vm.checkedNudge,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  (_vm.checkedNudge = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.checkedNudge = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.checkedNudge = $$c
+                            }
+                          },
+                          function($event) {
+                            return _vm.filterlowProduct()
+                          }
+                        ]
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "cheese-text nachos" }, [
+                  _c("strong", [
+                    _vm._v("Why not adding some "),
+                    _c("span", [_vm._v(_vm._s(_vm.slowProduct.name))]),
+                    _vm._v(" ?")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "text-center", attrs: { width: "150" } },
+                  [_c("strong", [_vm._v("€" + _vm._s(_vm.slowProduct.price))])]
+                )
+              ])
+            ])
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "grid-x grid-padding-x review-checkout" }, [
         _c("div", { staticClass: "cell text-right" }, [
@@ -49295,64 +49393,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tbody", [
-      _c("tr", [
-        _c("td", { attrs: { width: "150" } }, [
-          _c("div", { staticClass: "switch large" }, [
-            _c("input", {
-              staticClass: "switch-input",
-              attrs: {
-                id: "yes-no",
-                type: "checkbox",
-                checked: "checked",
-                name: "exampleSwitch"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "switch-paddle", attrs: { for: "yes-no" } },
-              [
-                _c(
-                  "span",
-                  {
-                    staticClass: "switch-active",
-                    attrs: { "aria-hidden": "true" }
-                  },
-                  [_vm._v("Yes")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "switch-inactive",
-                    attrs: { "aria-hidden": "true" }
-                  },
-                  [_vm._v("No")]
-                )
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "cheese-text nachos" }, [
-          _c("strong", [
-            _vm._v("Why not adding some "),
-            _c("span", [_vm._v("Nachos")]),
-            _vm._v(" ?")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "text-center", attrs: { width: "150" } }, [
-          _c("strong", [_vm._v("€30.00")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "grid-x align-center" }, [
       _c("div", { staticClass: "cell small-10 medium-8" }, [
         _c("div", { staticClass: "callout" }, [
@@ -49374,12 +49414,34 @@ var staticRenderFns = [
             _c(
               "div",
               { staticClass: "cell medium-4 icon-wrapper text-center" },
-              [_c("i", { staticClass: "fas fa-ice-cream" })]
+              [_c("i", { staticClass: "fas fa-ticket-alt" })]
             )
           ])
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "switch-paddle", attrs: { for: "yes-no" } },
+      [
+        _c(
+          "span",
+          { staticClass: "switch-active", attrs: { "aria-hidden": "true" } },
+          [_vm._v("Yes")]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: "switch-inactive", attrs: { "aria-hidden": "true" } },
+          [_vm._v("No")]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this

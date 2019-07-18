@@ -45,7 +45,7 @@
                 axios.get('api/nudges/getanudge').then(function(res){
                     $this.nudge = res.data;
 
-                    // $this.nudge = { "id": 3, "name": "Discount" };
+                    // $this.nudge = { "id": 2, "name": "At checkout" };
 
                     
                 });
