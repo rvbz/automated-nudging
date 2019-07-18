@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Nudge;
+use App\Sell;
 
 class ShowWelcomePage extends Controller
 {
@@ -47,9 +49,18 @@ class ShowWelcomePage extends Controller
      *
      */
     public function getSlowMovingProduct() {
-        // NEE TO CHANGE THIS FOR A LOGIC GETTING
-        $product = Product::inRandomOrder()->first();
+        // Get the products sold, group by their product_id and adding a column with their count
+        // Then order those by the less sold and got the firts one
+        // THAT'S OUR SLOW MOVING PRODUCT
+        $product = DB::table('sells')
+                 ->join('products', 'sells.product_id', '=', 'products.id')
+                 ->select(DB::raw('count(*) as total_sells'), 'products.*')
+                 ->groupBy('product_id')
+                 ->orderBy('total_sells', 'asc')
+                 ->first();
 
         return response()->json($product);
     }
+
+
 }

@@ -10,6 +10,17 @@ class Product extends Model
 
     public $timestamps = false;
 
+
+    /**
+     * Get the sells for the product.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Sell');
+    }
+
+
+
     // Add a new attribute
     protected $appends = ['slow_moving'];
 
@@ -28,4 +39,6 @@ class Product extends Model
 	    	return false;
 	    }
 	}
+
+
 }
