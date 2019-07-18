@@ -49320,13 +49320,20 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("td", { staticClass: "cheese-text nachos" }, [
-                  _c("strong", [
-                    _vm._v("Why not adding some "),
-                    _c("span", [_vm._v(_vm._s(_vm.slowProduct.name))]),
-                    _vm._v(" ?")
-                  ])
-                ]),
+                _c(
+                  "td",
+                  {
+                    class:
+                      "cheese-text " + _vm.toLowerCase(_vm.slowProduct.name)
+                  },
+                  [
+                    _c("strong", [
+                      _vm._v("Why not adding some "),
+                      _c("span", [_vm._v(_vm._s(_vm.slowProduct.name))]),
+                      _vm._v(" ?")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "td",

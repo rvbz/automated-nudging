@@ -14096,6 +14096,27 @@ html.is-reveal-open body {
 .checkout .auto-addition-checkout .cheese-text.nachos {
   background: url("../images/products/nachos/nachos-check-box.png") right top no-repeat;
 }
+.checkout .auto-addition-checkout .cheese-text.popcorn {
+  background: url("../images/products/popcorn/popcorn-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .cheese-text.water {
+  background: url("../images/products/water/water-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .cheese-text.soda {
+  background: url("../images/products/soda/soda-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .cheese-text.hotdog {
+  background: url("../images/products/hotdog/hotdog-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .cheese-text.candies {
+  background: url("../images/products/candies/candies-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .cheese-text.icecream {
+  background: url("../images/products/icecream/icecream-check-box.png") right top no-repeat;
+}
+.checkout .auto-addition-checkout .cheese-text.icedrink {
+  background: url("../images/products/icedrink/icedrink-check-box.png") right top no-repeat;
+}
 .checkout .auto-addition-checkout .switch {
   margin: 15px auto;
   text-align: center;

@@ -77,7 +77,7 @@
                           </label>
                         </div>
                       </td>
-                      <td class="cheese-text nachos"><strong>Why not adding some <span>{{ slowProduct.name }}</span> ?</strong></td>
+                      <td :class="'cheese-text ' + toLowerCase(slowProduct.name)"><strong>Why not adding some <span>{{ slowProduct.name }}</span> ?</strong></td>
                       <td width="150" class="text-center"><strong>€{{ slowProduct.price }}</strong></td>
                     </tr>
                 </tbody>
