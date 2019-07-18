@@ -41,7 +41,7 @@
             
 
             <!-- Product Masonry -->
-            <div v-masonry transition-duration="0.3s" item-selector=".product" column-width=".item-sizer" class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
+            <div v-masonry horizontal-order="true" transition-duration="0.3s" item-selector=".product" column-width=".item-sizer" class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
                 <div class="item-sizer"></div>
                 <div v-masonry-tile class="cell product" v-for="(product, index) in sortedArray" v-bind:class="{ 'item--width2': (product.name==$parent.slowProduct.name && product.visual_nudge_mode == 'Landscape') }">
                     <div class="product-inside">

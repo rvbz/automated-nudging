@@ -79,3 +79,24 @@
 		}
 	}
 }
+
+.callout {
+	box-shadow: 0px 0px 3px #e0e6ec;
+
+	h3 {
+		// color: $black;
+	}
+
+	.cell.message {
+		padding: 1rem;
+	}
+
+	.icon-wrapper {
+		background: #f5f3f1;
+		border-top-right-radius: rem-calc(5);
+		border-bottom-right-radius: rem-calc(5);
+
+		padding: rem-calc(15);
+		font-size: rem-calc(90);
+	}
+}

@@ -1916,6 +1916,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2736,11 +2765,7 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
     axios.get('api/products/getslowmoving').then(function (response) {
       $this.slowProduct = response.data;
       axios.get('api/nudges/getanudge').then(function (res) {
-        // $this.nudge = res.data;
-        $this.nudge = {
-          "id": 3,
-          "name": "Discount"
-        };
+        $this.nudge = res.data; // $this.nudge = { "id": 3, "name": "Discount" };
       });
     });
   },
@@ -49120,92 +49145,100 @@ var render = function() {
           }
         }
       }),
-      _vm._v("\n\n" + _vm._s(_vm.cart) + "\n        "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("table", { staticClass: "unstriped" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.cart, function(product) {
-            return _c("tr", [
-              _c("td", [
-                _c("img", {
-                  attrs: {
-                    src:
-                      "/images/products/" +
-                      _vm.toLowerCase(product.product) +
-                      "/" +
-                      _vm.toLowerCase(product.product) +
-                      "-grid.png",
-                    alt: product.product
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", [_c("strong", [_vm._v(_vm._s(product.product))])]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
-                _c("strong", [_vm._v("€" + _vm._s(product.unit_price))])
-              ]),
+      _vm._v("\n\n" + _vm._s(_vm.cart) + "\n\n\t\t"),
+      Object.keys(_vm.cart).length !== 0
+        ? [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("table", { staticClass: "unstriped" }, [
+              _vm._m(1),
               _vm._v(" "),
               _c(
-                "td",
-                { staticClass: "text-center" },
-                [
-                  _c(
-                    "integer-plusminus",
-                    {
-                      attrs: { min: 1 },
-                      on: {
-                        input: function($event) {
-                          return _vm.getGrandTotal()
+                "tbody",
+                _vm._l(_vm.cart, function(product) {
+                  return _c("tr", [
+                    _c("td", [
+                      _c("img", {
+                        attrs: {
+                          src:
+                            "/images/products/" +
+                            _vm.toLowerCase(product.product) +
+                            "/" +
+                            _vm.toLowerCase(product.product) +
+                            "-grid.png",
+                          alt: product.product
                         }
-                      },
-                      model: {
-                        value: product.qty,
-                        callback: function($$v) {
-                          _vm.$set(product, "qty", $$v)
-                        },
-                        expression: "product.qty"
-                      }
-                    },
-                    [
-                      _c("template", { slot: "decrement" }, [
-                        _c("i", {
-                          staticClass: "fas fa-minus",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("template", { slot: "increment" }, [
-                        _c("i", {
-                          staticClass: "fas fa-plus",
-                          attrs: { "aria-hidden": "true" }
-                        })
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_c("strong", [_vm._v(_vm._s(product.product))])]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-center" }, [
+                      _c("strong", [_vm._v("€" + _vm._s(product.unit_price))])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "text-center" },
+                      [
+                        _c(
+                          "integer-plusminus",
+                          {
+                            attrs: { min: 1 },
+                            on: {
+                              input: function($event) {
+                                return _vm.getGrandTotal()
+                              }
+                            },
+                            model: {
+                              value: product.qty,
+                              callback: function($$v) {
+                                _vm.$set(product, "qty", $$v)
+                              },
+                              expression: "product.qty"
+                            }
+                          },
+                          [
+                            _c("template", { slot: "decrement" }, [
+                              _c("i", {
+                                staticClass: "fas fa-minus",
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("template", { slot: "increment" }, [
+                              _c("i", {
+                                staticClass: "fas fa-plus",
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            ])
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-center" }, [
+                      _c("strong", [
+                        _vm._v("€" + _vm._s(_vm.getSubTotal(product)))
                       ])
-                    ],
-                    2
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
-                _c("strong", [_vm._v("€" + _vm._s(_vm.getSubTotal(product)))])
-              ])
-            ])
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
-      _vm.checkForCheckoutNudge()
-        ? _c("table", { staticClass: "unstriped auto-addition-checkout" }, [
-            _vm._m(2)
-          ])
-        : _vm._e(),
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _vm.checkForCheckoutNudge()
+              ? _c(
+                  "table",
+                  { staticClass: "unstriped auto-addition-checkout" },
+                  [_vm._m(2)]
+                )
+              : _vm._e()
+          ]
+        : [_vm._m(3)],
       _vm._v(" "),
       _c("div", { staticClass: "grid-x grid-padding-x review-checkout" }, [
         _c("div", { staticClass: "cell text-right" }, [
@@ -49215,10 +49248,12 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(4),
+        _vm._v(" "),
+        _vm._m(5)
       ])
     ],
-    1
+    2
   )
 }
 var staticRenderFns = [
@@ -49318,7 +49353,49 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cell text-right finish-button" }, [
+    return _c("div", { staticClass: "grid-x align-center" }, [
+      _c("div", { staticClass: "cell small-10 medium-8" }, [
+        _c("div", { staticClass: "callout" }, [
+          _c("div", { staticClass: "grid-x grid-padding-x" }, [
+            _c("div", { staticClass: "cell medium-8 text-center message" }, [
+              _c("h3", [_c("strong", [_vm._v("Your cart is empty")])]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("Looks like you will enjoy your movie without any snack")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [
+                  _vm._v("Click in the button below to finish your order")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "cell medium-4 icon-wrapper text-center" },
+              [_c("i", { staticClass: "fas fa-ice-cream" })]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cell small-6 finish-button" }, [
+      _c("a", { staticClass: "button clear large", attrs: { href: "/" } }, [
+        _vm._v("Back")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cell small-6 text-right finish-button" }, [
       _c(
         "a",
         { staticClass: "button round-icon large", attrs: { href: "#" } },
@@ -49980,6 +50057,7 @@ var render = function() {
         staticClass:
           "products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4",
         attrs: {
+          "horizontal-order": "true",
           "transition-duration": "0.3s",
           "item-selector": ".product",
           "column-width": ".item-sizer"

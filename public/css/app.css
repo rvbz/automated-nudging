@@ -10793,11 +10793,11 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .callout {
   position: relative;
   margin: 0 0 1rem 0;
-  padding: 1rem;
-  border: 1px solid rgba(10, 10, 10, 0.25);
-  border-radius: 0;
+  padding: 0;
+  border: 1px solid #e0e6ec;
+  border-radius: 0.2777777778rem;
   background-color: white;
-  color: #0a0a0a;
+  color: #9f9f9f;
 }
 .callout > :first-child {
   margin-top: 0;
@@ -10807,23 +10807,23 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 }
 .callout.primary {
   background-color: #fbe3ed;
-  color: #0a0a0a;
+  color: #9f9f9f;
 }
 .callout.secondary {
   background-color: #e1f0f9;
-  color: #0a0a0a;
+  color: #9f9f9f;
 }
 .callout.success {
   background-color: #e1faea;
-  color: #0a0a0a;
+  color: #9f9f9f;
 }
 .callout.warning {
   background-color: #fff3d9;
-  color: #0a0a0a;
+  color: #9f9f9f;
 }
 .callout.alert {
   background-color: #f7e4e1;
-  color: #0a0a0a;
+  color: #9f9f9f;
 }
 .callout.small {
   padding-top: 0.5rem;
@@ -14123,6 +14123,20 @@ html.is-reveal-open body {
 }
 .checkout .review-checkout .finish-button {
   margin-top: 2rem;
+}
+
+.callout {
+  box-shadow: 0px 0px 3px #e0e6ec;
+}
+.callout .cell.message {
+  padding: 1rem;
+}
+.callout .icon-wrapper {
+  background: #f5f3f1;
+  border-top-right-radius: 0.2777777778rem;
+  border-bottom-right-radius: 0.2777777778rem;
+  padding: 0.8333333333rem;
+  font-size: 5rem;
 }
 
 #product-discount {

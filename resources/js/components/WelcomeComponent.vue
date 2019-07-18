@@ -43,9 +43,9 @@
                 $this.slowProduct = response.data;
 
                 axios.get('api/nudges/getanudge').then(function(res){
-                    // $this.nudge = res.data;
+                    $this.nudge = res.data;
 
-                    $this.nudge = { "id": 3, "name": "Discount" };
+                    // $this.nudge = { "id": 3, "name": "Discount" };
 
                     
                 });

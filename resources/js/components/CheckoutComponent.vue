@@ -3,68 +3,97 @@
 		<loading :active.sync="isLoading" :color="'#359bd4'" :height="80" :width="80" :opacity="0.7"></loading>
 
 {{cart}}
-        <div class="grid-x grid-padding-x">
-            <div class="cell">
-                <h3><strong>You will enjoy your movie with:</strong></h3>
-            </div>
-        </div>
 
-        <table class="unstriped">
-        	<thead>
-			    <tr>
-			      <th width="150"></th>
-			      <th>Snack</th>
-			      <th class="text-center" width="150">Unit price</th>
-			      <th class="text-center" width="150">Qty</th>
-			      <th class="text-center" width="150">Subtotal</th>
-			    </tr>
-			</thead>
-			<tbody>
-			    <tr v-for="product in cart">
-			      <td><img :src="'/images/products/'+ toLowerCase(product.product) +'/'+ toLowerCase(product.product) +'-grid.png'" :alt="product.product"></td>
-			      <td><strong>{{ product.product }}</strong></td>
-			      <td class="text-center"><strong>€{{ product.unit_price }}</strong></td>
-			      <td class="text-center">
-			      	<integer-plusminus :min="1" v-model="product.qty" v-on:input="getGrandTotal()">
-                        <template slot="decrement">
-                            <i class="fas fa-minus" aria-hidden="true"></i>
-                        </template>
+		<template v-if="Object.keys(cart).length !== 0">
 
-                        <template slot="increment">
-                            <i class="fas fa-plus" aria-hidden="true"></i>
-                        </template>
-                    </integer-plusminus>
-			      </td>
-			      <td class="text-center"><strong>€{{ getSubTotal(product) }}</strong></td>
-			    </tr>
-			</tbody>
-		</table>
+	        <div class="grid-x grid-padding-x">
+	            <div class="cell">
+	                <h3><strong>You will enjoy your movie with:</strong></h3>
+	            </div>
+	        </div>
+
+	        <table class="unstriped">
+	        	<thead>
+				    <tr>
+				      <th width="150"></th>
+				      <th>Snack</th>
+				      <th class="text-center" width="150">Unit price</th>
+				      <th class="text-center" width="150">Qty</th>
+				      <th class="text-center" width="150">Subtotal</th>
+				    </tr>
+				</thead>
+				<tbody>
+				    <tr v-for="product in cart">
+				      <td><img :src="'/images/products/'+ toLowerCase(product.product) +'/'+ toLowerCase(product.product) +'-grid.png'" :alt="product.product"></td>
+				      <td><strong>{{ product.product }}</strong></td>
+				      <td class="text-center"><strong>€{{ product.unit_price }}</strong></td>
+				      <td class="text-center">
+				      	<integer-plusminus :min="1" v-model="product.qty" v-on:input="getGrandTotal()">
+	                        <template slot="decrement">
+	                            <i class="fas fa-minus" aria-hidden="true"></i>
+	                        </template>
+
+	                        <template slot="increment">
+	                            <i class="fas fa-plus" aria-hidden="true"></i>
+	                        </template>
+	                    </integer-plusminus>
+				      </td>
+				      <td class="text-center"><strong>€{{ getSubTotal(product) }}</strong></td>
+				    </tr>
+				</tbody>
+			</table>
 
 
-		<table class="unstriped auto-addition-checkout" v-if="checkForCheckoutNudge()">
-			<tbody>
-			    <tr>
-			      <td width="150">
-					<div class="switch large">
-					  <input class="switch-input" id="yes-no" type="checkbox" checked="checked" name="exampleSwitch">
-					  <label class="switch-paddle" for="yes-no">
-					    <span class="switch-active" aria-hidden="true">Yes</span>
-					    <span class="switch-inactive" aria-hidden="true">No</span>
-					  </label>
+			<table class="unstriped auto-addition-checkout" v-if="checkForCheckoutNudge()">
+				<tbody>
+				    <tr>
+				      <td width="150">
+						<div class="switch large">
+						  <input class="switch-input" id="yes-no" type="checkbox" checked="checked" name="exampleSwitch">
+						  <label class="switch-paddle" for="yes-no">
+						    <span class="switch-active" aria-hidden="true">Yes</span>
+						    <span class="switch-inactive" aria-hidden="true">No</span>
+						  </label>
+						</div>
+				      </td>
+				      <td class="cheese-text nachos"><strong>Why not adding some <span>Nachos</span> ?</strong></td>
+				      <td width="150" class="text-center"><strong>€30.00</strong></td>
+				    </tr>
+				</tbody>
+			</table>
+
+		</template>
+
+		<template v-else>
+			<div class="grid-x align-center">
+				<div class="cell small-10 medium-8">
+					<div class="callout">
+						<div class="grid-x grid-padding-x">
+							<div class="cell medium-8 text-center message">
+							  <h3><strong>Your cart is empty</strong></h3>
+							  <p>Looks like you will enjoy your movie without any snack</p>
+							  <p><strong>Click in the button below to finish your order</strong></p>
+							</div>
+							<div class="cell medium-4 icon-wrapper text-center">
+								
+									<i class="fas fa-ice-cream"></i>
+
+							</div>
+						</div>
 					</div>
-			      </td>
-			      <td class="cheese-text nachos"><strong>Why not adding some <span>Nachos</span> ?</strong></td>
-			      <td width="150" class="text-center"><strong>€30.00</strong></td>
-			    </tr>
-			</tbody>
-		</table>
+				</div>
+			</div>
+		</template>
 
 
 		<div class="grid-x grid-padding-x review-checkout">
             <div class="cell text-right">
                 <h4><strong>Grand Total:</strong> €{{ grandTotal }}</h4>
             </div>
-            <div class="cell text-right finish-button">
+            <div class="cell small-6 finish-button">
+                <a href="/" class="button clear large">Back</a>
+            </div>
+            <div class="cell small-6 text-right finish-button">
                 <a href="#" class="button round-icon large">Finish</a>
             </div>
         </div>
