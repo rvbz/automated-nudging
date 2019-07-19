@@ -3074,11 +3074,7 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_4__["def
     axios.get('api/products/getslowmoving').then(function (response) {
       $this.slowProduct = response.data;
       axios.get('api/nudges/getanudge').then(function (res) {
-        // $this.nudge = res.data;
-        $this.nudge = {
-          "id": 1,
-          "name": "Visual products"
-        };
+        $this.nudge = res.data; // $this.nudge = { "id": 1, "name": "Visual products" };
       });
     });
   },
