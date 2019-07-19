@@ -1941,10 +1941,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2119,8 +2115,8 @@ __webpack_require__.r(__webpack_exports__);
 
                 if (response3.data == "All saved") {
                   // CREATE A FINISH STAGE
-                  alert('You have finish thank you'); // SEND TO Thanks PAGE
-
+                  // alert('You have finish thank you');
+                  // SEND TO Thanks PAGE
                   window.location.href = "/thanks";
                 }
               });
@@ -2166,7 +2162,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_integer_plusminus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-integer-plusminus */ "./node_modules/vue-integer-plusminus/src/main.js");
-//
 //
 //
 //
@@ -2386,7 +2381,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_integer_plusminus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-integer-plusminus */ "./node_modules/vue-integer-plusminus/src/main.js");
-//
 //
 //
 //
@@ -2865,10 +2859,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2994,10 +2984,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VisualNudge.vue */ "./resources/js/components/VisualNudge.vue");
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
 /* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_4__);
-//
-//
-//
-//
 //
 //
 //
@@ -49484,15 +49470,7 @@ var render = function() {
           }
         }
       }),
-      _vm._v(
-        "\n\n" +
-          _vm._s(_vm.cart) +
-          "\n" +
-          _vm._s(_vm.nudge) +
-          "\n" +
-          _vm._s(_vm.slowProduct) +
-          "\n\n\t\t"
-      ),
+      _vm._v(" "),
       Object.keys(_vm.cart).length !== 0
         ? [
             _vm._m(0),
@@ -49862,7 +49840,6 @@ var render = function() {
         ])
       ])
     ]),
-    _vm._v("\n\n    " + _vm._s(_vm.cart) + "\n\n    "),
     _vm._v(" "),
     _c(
       "div",
@@ -50129,7 +50106,6 @@ var render = function() {
         ])
       ])
     ]),
-    _vm._v("\n\n    " + _vm._s(_vm.cart) + "\n\n    "),
     _vm._v(" "),
     _c(
       "div",
@@ -50743,7 +50719,6 @@ var render = function() {
         ])
       ])
     ]),
-    _vm._v("\n\n    " + _vm._s(_vm.cart) + "\n\n    \n\n    "),
     _vm._v(" "),
     _c(
       "div",
@@ -50968,15 +50943,7 @@ var render = function() {
           }
         }
       }),
-      _vm._v(
-        "\n    \n    " +
-          _vm._s(_vm.nudge) +
-          "\n    " +
-          _vm._s(_vm.slowProduct) +
-          "\n    " +
-          _vm._s(_vm.email) +
-          "\n\n    "
-      ),
+      _vm._v(" "),
       _vm.nudge.id == 3
         ? _c("modal-nudge")
         : _vm.nudge.id == 2
@@ -50989,7 +50956,11 @@ var render = function() {
         "div",
         {
           staticClass: "reveal large",
-          attrs: { id: "welcome-modal", "data-reveal": "" }
+          attrs: {
+            id: "welcome-modal",
+            "data-reveal": "",
+            "data-close-on-click": "false"
+          }
         },
         [
           _c("div", { staticClass: "grid-x movie-ticket" }, [
@@ -51097,7 +51068,30 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(3)
+            _c("div", { staticClass: "cell medium-3 ticket-left" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              !_vm.emailField
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "close-button",
+                      attrs: {
+                        "data-close": "",
+                        "aria-label": "Close modal",
+                        type: "button"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ])
           ])
         ]
       )
@@ -51138,33 +51132,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cell medium-3 ticket-left" }, [
-      _c("h2", { staticClass: "title-bar text-center" }, [
+    return _c("h2", { staticClass: "title-bar text-center" }, [
+      _c("i", { staticClass: "fas fa-barcode" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-wrapper text-center" }, [
+      _c("p", [_c("span", { staticClass: "seat" }, [_vm._v("28")])]),
+      _vm._v(" "),
+      _c("p", [_c("span", [_vm._v("seat")])]),
+      _vm._v(" "),
+      _c("p", { staticClass: "barcode" }, [
         _c("i", { staticClass: "fas fa-barcode" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content-wrapper text-center" }, [
-        _c("p", [_c("span", { staticClass: "seat" }, [_vm._v("28")])]),
-        _vm._v(" "),
-        _c("p", [_c("span", [_vm._v("seat")])]),
-        _vm._v(" "),
-        _c("p", { staticClass: "barcode" }, [
-          _c("i", { staticClass: "fas fa-barcode" })
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close-button",
-          attrs: {
-            "data-close": "",
-            "aria-label": "Close modal",
-            type: "button"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
+      ])
     ])
   }
 ]

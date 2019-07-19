@@ -36,10 +36,6 @@
                 </div>
             </div>
 
-            {{ cart }}
-
-            
-
             <!-- Product Masonry -->
             <div v-masonry horizontal-order="true" transition-duration="0.3s" item-selector=".product" column-width=".item-sizer" class="products-wrapper grid-x grid-padding-x small-up-2 medium-up-2 large-up-4">
                 <div class="item-sizer"></div>

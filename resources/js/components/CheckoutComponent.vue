@@ -2,10 +2,6 @@
 	<div class="grid-container checkout">
 		<loading :active.sync="isLoading" :color="'#359bd4'" :height="80" :width="80" :opacity="0.7"></loading>
 
-{{cart}}
-{{nudge}}
-{{slowProduct}}
-
 		<template v-if="Object.keys(cart).length !== 0">
 
 	        <div class="grid-x grid-padding-x">
@@ -280,7 +276,7 @@
                                     if (response3.data == "All saved") {
 
                                         // CREATE A FINISH STAGE
-                                        alert('You have finish thank you');
+                                        // alert('You have finish thank you');
 
                                         // SEND TO Thanks PAGE
                                         window.location.href = "/thanks";

@@ -3,18 +3,14 @@
             
 
             <loading :active.sync="isLoading" :color="'#359bd4'" :height="80" :width="80" :opacity="0.7"></loading>
-            
-            {{ nudge }}
-            {{ slowProduct }}
-            {{email}}
-    
+
             <modal-nudge v-if="nudge.id == 3"></modal-nudge>
 
             <checkout-nudge v-else-if="nudge.id == 2"></checkout-nudge>
             
             <visual-nudge v-else-if="nudge.id == 1"></visual-nudge>
 
-            <div class="reveal large" id="welcome-modal" data-reveal>
+            <div class="reveal large" id="welcome-modal" data-reveal data-close-on-click="false">
                 <div class="grid-x movie-ticket">
                     <div class="cell medium-9 ticket-right">
                         <h2 class="title-bar"><strong>Wold Cinemas</strong></h2>
@@ -52,7 +48,7 @@
                             <p class="barcode"><i class="fas fa-barcode"></i></p>
                         </div>
 
-                        <button class="close-button" data-close aria-label="Close modal" type="button">
+                        <button v-if="!emailField" class="close-button" data-close aria-label="Close modal" type="button">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
