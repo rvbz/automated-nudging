@@ -2860,6 +2860,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2873,7 +2919,10 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
     Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   mounted: function mounted() {
-    // Get all products
+    this.email = this.attremail;
+    $(this.$el).foundation();
+    $("#welcome-modal").foundation('open'); // Get all products
+
     var $this = this; //get the slow-moving product
 
     axios.get('api/products/getslowmoving').then(function (response) {
@@ -2884,7 +2933,7 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
     });
   },
   props: {
-    email: {
+    attremail: {
       type: String,
       required: true
     }
@@ -2894,10 +2943,28 @@ Vue.component('visual-nudge', _VisualNudge_vue__WEBPACK_IMPORTED_MODULE_3__["def
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       nudge: [],
       slowProduct: {},
-      isLoading: true
+      isLoading: true,
+      email: "",
+      emailField: this.showEmailField()
     };
   },
-  methods: {}
+  methods: {
+    initProject: function initProject() {
+      $('#email-form').on("formvalid.zf.abide", function (ev, frm) {
+        $('#welcome-modal').foundation('close');
+      });
+      $('#email-form').foundation('validateForm');
+    },
+    showEmailField: function showEmailField() {
+      var val = false;
+
+      if (this.attremail == '') {
+        val = true;
+      }
+
+      return val;
+    }
+  }
 });
 
 /***/ }),
@@ -50459,12 +50526,191 @@ var render = function() {
         ? _c("checkout-nudge")
         : _vm.nudge.id == 1
         ? _c("visual-nudge")
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "reveal large",
+          attrs: { id: "welcome-modal", "data-reveal": "" }
+        },
+        [
+          _c("div", { staticClass: "grid-x movie-ticket" }, [
+            _c("div", { staticClass: "cell medium-9 ticket-right" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "content-wrapper text-center" }, [
+                _c("h2", { staticClass: "text-center" }, [
+                  _vm._v("Instructions")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-center" }, [
+                  _vm._v("You have just booked 2 ticket to watch")
+                ]),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-center" }, [
+                  _vm._v(
+                    "in your preferred Cinema Theatre, now you are prompted to select the snacks you would like to add to your cart (if any) to accompany your tickets."
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: {
+                      "data-abide": "",
+                      novalidate: "",
+                      id: "email-form"
+                    },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.initProject()
+                      }
+                    }
+                  },
+                  [
+                    _vm.emailField
+                      ? _c("div", { staticClass: "grid-x grid-padding-x" }, [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "small-10 cell" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.email,
+                                  expression: "email"
+                                }
+                              ],
+                              attrs: {
+                                type: "email",
+                                id: "middle-label",
+                                placeholder: "example@email.com",
+                                required: "",
+                                "aria-errormessage": "errorMessage",
+                                pattern: "email"
+                              },
+                              domProps: { value: _vm.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.email = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "form-error",
+                                attrs: { id: "errorMessage" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                I'm required!\n                              "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "button round-icon secondary-color",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.initProject()
+                      }
+                    }
+                  },
+                  [_vm._v("Begin")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(3)
+          ])
+        ]
+      )
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "title-bar" }, [
+      _c("strong", [_vm._v("Wold Cinemas")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("AVENGERS ENDGAME")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-2 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-right middle", attrs: { for: "middle-label" } },
+        [_vm._v("E-mail")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cell medium-3 ticket-left" }, [
+      _c("h2", { staticClass: "title-bar text-center" }, [
+        _c("i", { staticClass: "fas fa-barcode" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content-wrapper text-center" }, [
+        _c("p", [_c("span", { staticClass: "seat" }, [_vm._v("28")])]),
+        _vm._v(" "),
+        _c("p", [_c("span", [_vm._v("seat")])]),
+        _vm._v(" "),
+        _c("p", { staticClass: "barcode" }, [
+          _c("i", { staticClass: "fas fa-barcode" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close-button",
+          attrs: {
+            "data-close": "",
+            "aria-label": "Close modal",
+            type: "button"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -3,7 +3,7 @@
 @section('content')
     	
 
-        <welcome-component :email="'{{$email}}'"></welcome-component>
+        <welcome-component :attremail="'{{$email}}'"></welcome-component>
     
         
 

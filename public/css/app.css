@@ -14240,6 +14240,66 @@ html.is-reveal-open body {
   margin-bottom: 1rem;
 }
 
+#welcome-modal {
+  background: none;
+  border: none;
+}
+#welcome-modal .movie-ticket {
+  background: #ecedef;
+  border-radius: 0.5555555556rem;
+  overflow: hidden;
+}
+#welcome-modal .movie-ticket .title-bar {
+  background: #359bd4;
+  padding: 0.5555555556rem;
+  font-size: 1.3333333333rem;
+  border-top-left-radius: 0.5555555556rem;
+}
+#welcome-modal .movie-ticket .content-wrapper {
+  padding: 1rem;
+}
+#welcome-modal .movie-ticket .ticket-left {
+  position: relative;
+  border-left: 0.2222222222rem dashed #8a8a8a;
+}
+#welcome-modal .movie-ticket .ticket-left:before, #welcome-modal .movie-ticket .ticket-left:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 1.3888888889rem;
+  height: 1.3888888889rem;
+  background: #8a8a8a;
+  border-radius: 50%;
+  left: -0.8em;
+}
+#welcome-modal .movie-ticket .ticket-left:before {
+  top: -0.7em;
+}
+#welcome-modal .movie-ticket .ticket-left:after {
+  bottom: -0.7em;
+}
+#welcome-modal .movie-ticket .ticket-left .content-wrapper {
+  margin-top: 2.7777777778rem;
+}
+#welcome-modal .movie-ticket .ticket-left .title-bar {
+  display: block;
+}
+#welcome-modal .movie-ticket .ticket-left p {
+  margin-bottom: 0;
+}
+#welcome-modal .movie-ticket .ticket-left p.barcode {
+  margin-top: 0.8333333333rem;
+  font-size: 2.2222222222rem;
+}
+#welcome-modal .movie-ticket .ticket-left .seat {
+  font-size: 1.7777777778rem;
+  color: #359bd4;
+  font-weight: bold;
+}
+#welcome-modal .movie-ticket .ticket-left .close-button {
+  color: #fefefe;
+}
+
 .footer {
   background: #222222;
   padding-top: 2rem;

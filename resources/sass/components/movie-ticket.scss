@@ -1,0 +1,76 @@
+$ticket-border-radious: rem-calc(10);
+
+#welcome-modal {
+  background: none;
+  border: none;
+
+  .movie-ticket {
+    background: #ecedef;
+    border-radius: $ticket-border-radious;
+    overflow: hidden;
+
+    .title-bar {
+      background: $secondary-color;
+      padding: rem-calc(10);
+      font-size: rem-calc(24);
+      border-top-left-radius: $ticket-border-radious;
+    }
+
+    .content-wrapper {
+      padding: $global-padding;
+    }
+    
+    .ticket-right {
+
+    }
+    .ticket-left{
+      position: relative;
+      border-left: rem-calc(4) dashed $dark-gray;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: rem-calc(25);
+        height: rem-calc(25);
+        background: $dark-gray;
+        border-radius: 50%;
+        left: -.8em;
+      }
+      &:before {
+        top: -.7em;
+      }
+      &:after {
+      bottom: -.7em;
+      }
+
+      .content-wrapper {
+        margin-top: rem-calc(50px);
+      }
+
+      .title-bar {
+        display: block;
+      }
+
+      p {
+        margin-bottom: 0;
+
+        &.barcode{
+          margin-top: rem-calc(15);
+          font-size: rem-calc(40);
+        }
+      }
+
+      .seat {
+        font-size: rem-calc(32);
+        color: $secondary-color;
+        font-weight: bold;
+      }
+
+      .close-button {
+        color: $white;
+      }
+
+    }
+  }
+}
