@@ -17,8 +17,7 @@ class CreateSellsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->unsignedBigInteger('user_fill_id')->nullable();
-            $table->foreign('user_fill_id')->references('id')->on('user_fills')->onDelete('cascade');
+            
             $table->integer('qty');
             $table->boolean('was_slow_moving')->nullable();
 
