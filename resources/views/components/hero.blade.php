@@ -1,4 +1,4 @@
-<div class="hero">
+<div class="hero" id="sticky-point">
     <div class="grid-container">
         <nav class="top-bar topbar-responsive">
             <div class="top-bar-title">

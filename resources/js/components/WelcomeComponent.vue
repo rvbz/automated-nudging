@@ -55,16 +55,21 @@
                 </div>
             </div>
 
+            <vue-snotify></vue-snotify>
+
         </div>
 </template>
 
 <script>
     import Loading from 'vue-loading-overlay';
+    import Snotify from 'vue-snotify';
     import ModalNudge from './ModalNudge.vue';
     import CheckoutNudge from './CheckoutNudge.vue';
     import VisualNudge from './VisualNudge.vue';
 
     import 'vue-loading-overlay/dist/vue-loading.css';
+
+    Vue.use(Snotify);
 
     Vue.component('modal-nudge', ModalNudge);
     Vue.component('checkout-nudge', CheckoutNudge);
@@ -90,9 +95,9 @@
                 $this.slowProduct = response.data;
 
                 axios.get('api/nudges/getanudge').then(function(res){
-                    $this.nudge = res.data;
+                    // $this.nudge = res.data;
 
-                    // $this.nudge = { "id": 2, "name": "At checkout" };
+                    $this.nudge = { "id": 1, "name": "Visual products" };
 
                     
                 });

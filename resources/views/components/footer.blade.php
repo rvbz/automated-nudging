@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer" id="footer">
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
             <div class="cell medium-6 large-3">

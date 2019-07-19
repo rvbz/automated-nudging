@@ -16,12 +16,16 @@ $fa-font-path: '/fonts/font-awesome';
 @import '~foundation-sites/assets/foundation';
 
 
+// Snotify
+@import "~vue-snotify/styles/material";
+
 /*==================================
 =            Components            =
 ==================================*/
 
 @import 'components/plus-minus-input';
 @import 'components/button-extend';
+
 
 @import 'components/hero';
 @import 'components/content';

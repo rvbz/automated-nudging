@@ -175,6 +175,8 @@
 
                 // Now get total price
                 this.getGrandTotal();
+
+                this.$parent.$snotify.success('Product added to your cart');
             },
 
             getGrandTotal() {
