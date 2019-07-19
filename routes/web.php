@@ -17,9 +17,15 @@ Route::get('/checkout', function() {
 	return view('checkout');
 });
 
+Route::get('/thanks', function() {
+	return view('thankyou');
+});
+
 Route::post('users', 'UserController@store');
 Route::post('users/sells', 'UserController@storeSells');
 Route::post('users/fills', 'UserController@storeFills');
+Route::post('users/getfills', 'UserController@getFills');
+Route::post('users/emotion', 'UserController@storeEmotion');
 
 /*===========================
 =            API            =

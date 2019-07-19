@@ -1,0 +1,97 @@
+.thankyou-page {
+	.emotions-wrapper {
+		margin-top: $global-margin * 3;
+		margin-bottom: $global-margin * 2;
+
+		.emotions {
+			margin-bottom: $global-margin * 2;
+
+			.cell {
+
+				.foundation-radio-button {
+  
+					  position:relative;
+
+					  input[type="radio"] {
+						-webkit-appearance: none;
+						}
+					  
+					  input.button {
+					    background: none;
+					    width: 95px;
+					    height: 133px;
+					    border-radius: rem-calc(8);
+
+					    &:hover {
+					      background: $light-gray;
+					    }
+					    margin-bottom:0;
+					    padding:1.25em;
+					    
+					    &[type="radio"]:checked {
+					      border: 2px solid $primary-color;
+					      border-radius: rem-calc(8);
+					    }
+					    
+					    + label {
+					      font-size: $global-font-size;
+							padding: $global-padding;
+							border-radius: rem-calc(8);
+							margin: 0;
+
+					      position:absolute;
+					      top:50%;;
+					      left:50%;
+					      display:inline-block;
+					      width:auto;
+					      transform:translate(-50%, -50%);
+					    }
+					  }
+				}
+
+
+
+				i {
+					font-size: rem-calc(60);
+					display: block;
+				}
+
+				&.bored {
+					i {
+						color: $primary-color;
+					}
+				}
+
+				&.joy {
+					i {
+						color: $secondary-color;
+					}
+				}
+
+				&.calm {
+					i {
+						color: $success-color;
+					}
+				}
+
+				&.sad {
+					i {
+						color: $alert-color;
+					}
+				}
+			}
+		}
+	}
+
+	.thumb-up {
+		.callout {
+			h3 {
+				margin-top: rem-calc(30);
+			}
+
+			.icon-wrapper i {
+				    transform: rotate(0deg);
+			}
+		}
+	}
+}

@@ -113,4 +113,39 @@ class UserController extends Controller
         
         return $user_fill;
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getFills(Request $request)
+    {
+        // Get the user fill of the sent email
+        $user_fill = User::where('email', $request->user_email)->first()->user_fill;
+        
+        return $user_fill;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeEmotion(Request $request)
+    {
+        // Get the user fill of the sent email
+        $user_fill = User::where('email', $request->user_email)->first()->user_fill;
+
+        $user_fill->emotion = $request->emotion;
+
+        if ($user_fill->save()) {
+            return 'Emotion saved';
+        } else {
+            return 'error';
+        }
+
+    }
 }

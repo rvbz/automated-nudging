@@ -14307,4 +14307,69 @@ html.is-reveal-open body {
   color: #fefefe;
 }
 
+.thankyou-page .emotions-wrapper {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+.thankyou-page .emotions-wrapper .emotions {
+  margin-bottom: 2rem;
+}
+.thankyou-page .emotions-wrapper .emotions .cell .foundation-radio-button {
+  position: relative;
+}
+.thankyou-page .emotions-wrapper .emotions .cell .foundation-radio-button input[type=radio] {
+  -webkit-appearance: none;
+}
+.thankyou-page .emotions-wrapper .emotions .cell .foundation-radio-button input.button {
+  background: none;
+  width: 95px;
+  height: 133px;
+  border-radius: 0.4444444444rem;
+  margin-bottom: 0;
+  padding: 1.25em;
+}
+.thankyou-page .emotions-wrapper .emotions .cell .foundation-radio-button input.button:hover {
+  background: #e6e6e6;
+}
+.thankyou-page .emotions-wrapper .emotions .cell .foundation-radio-button input.button[type=radio]:checked {
+  border: 2px solid #e14489;
+  border-radius: 0.4444444444rem;
+}
+.thankyou-page .emotions-wrapper .emotions .cell .foundation-radio-button input.button + label {
+  font-size: 1.125rem;
+  padding: 1rem;
+  border-radius: 0.4444444444rem;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-block;
+  width: auto;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.thankyou-page .emotions-wrapper .emotions .cell i {
+  font-size: 3.3333333333rem;
+  display: block;
+}
+.thankyou-page .emotions-wrapper .emotions .cell.bored i {
+  color: #e14489;
+}
+.thankyou-page .emotions-wrapper .emotions .cell.joy i {
+  color: #359bd4;
+}
+.thankyou-page .emotions-wrapper .emotions .cell.calm i {
+  color: #3adb76;
+}
+.thankyou-page .emotions-wrapper .emotions .cell.sad i {
+  color: #cc4b37;
+}
+.thankyou-page .thumb-up .callout h3 {
+  margin-top: 1.6666666667rem;
+}
+.thankyou-page .thumb-up .callout .icon-wrapper i {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
 /*=====  End of Components  ======*/

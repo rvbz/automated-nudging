@@ -21,6 +21,7 @@ class CreateUserFillsTable extends Migration
             $table->foreign('nudge_id')->references('id')->on('nudges')->onDelete('cascade');
             $table->unsignedBigInteger('slow_moving_product_id');
             $table->foreign('slow_moving_product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->string('emotion')->nullable();
 
             $table->timestamps();
         });
