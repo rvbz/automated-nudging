@@ -33,6 +33,15 @@
                                       </span>
                                     </div>
                                 </div>
+
+                                <div class="grid-x grid-padding-x">
+                                    <div class="cell small-1">
+                                        <input id="checkbox1" type="checkbox" checked="checked" required>
+                                    </div>
+                                    <div class="cell small-11 text-left">
+                                        <label for="checkbox1" class="cell small-11">I have read and understood the <a href="/documents/Information-Form-and-Consent-Sheet.pdf" target="_blank">Participant Information Sheet</a>, questions about my participation in this study have been answered satisfactorily, I am aware of the potential risks (if any), and I am taking part in this research study voluntarily (without coercion).</label>
+                                    </div>
+                                </div>
                             </form>
 
                             <a href="#" class="button round-icon secondary-color" @click.prevent="initProject()">Begin</a>

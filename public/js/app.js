@@ -3050,6 +3050,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -51055,7 +51064,9 @@ var render = function() {
                             )
                           ])
                         ])
-                      : _vm._e()
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._m(3)
                   ]
                 ),
                 _vm._v(" "),
@@ -51077,9 +51088,9 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "cell medium-3 ticket-left" }, [
-              _vm._m(3),
-              _vm._v(" "),
               _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
               _vm._v(" "),
               !_vm.emailField
                 ? _c(
@@ -51136,6 +51147,46 @@ var staticRenderFns = [
         { staticClass: "text-right middle", attrs: { for: "middle-label" } },
         [_vm._v("E-mail")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x grid-padding-x" }, [
+      _c("div", { staticClass: "cell small-1" }, [
+        _c("input", {
+          attrs: {
+            id: "checkbox1",
+            type: "checkbox",
+            checked: "checked",
+            required: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cell small-11 text-left" }, [
+        _c(
+          "label",
+          { staticClass: "cell small-11", attrs: { for: "checkbox1" } },
+          [
+            _vm._v("I have read and understood the "),
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "/documents/Information-Form-and-Consent-Sheet.pdf",
+                  target: "_blank"
+                }
+              },
+              [_vm._v("Participant Information Sheet")]
+            ),
+            _vm._v(
+              ", questions about my participation in this study have been answered satisfactorily, I am aware of the potential risks (if any), and I am taking part in this research study voluntarily (without coercion)."
+            )
+          ]
+        )
+      ])
     ])
   },
   function() {
@@ -66019,8 +66070,8 @@ window.addEventListener('DOMContentLoaded', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/Rvbz/School/automated-nudging/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Rvbz/School/automated-nudging/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/rvbz/School/automated-nudging/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/rvbz/School/automated-nudging/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
